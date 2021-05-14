@@ -9,7 +9,7 @@ import {
 } from "evergreen-ui"
 import { AppProps } from "next/app"
 
-import "../styles.css"
+import "../static/styles.css"
 
 import { theme } from "../utils/theme"
 
