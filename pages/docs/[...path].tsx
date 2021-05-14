@@ -4,7 +4,10 @@ import {
 	Code,
 	Heading,
 	ListItem,
+	majorScale,
+	minorScale,
 	OrderedList,
+	Pane,
 	Paragraph,
 	Pre,
 	Strong,
@@ -20,6 +23,7 @@ import type {
 
 import { readFileSync, readdirSync, statSync } from "fs"
 import { resolve } from "path"
+import { theme } from "utils/theme"
 
 type DocsParams = { path: string[] }
 
@@ -72,7 +76,7 @@ const h2: HeadingComponent = ({ children }) => (
 )
 
 const h3: HeadingComponent = ({ children }) => (
-	<Heading is="h3" size={700}>
+	<Heading is="h3" size={600}>
 		{children}
 	</Heading>
 )

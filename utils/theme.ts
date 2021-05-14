@@ -75,17 +75,23 @@ export const theme: Theme = {
 				900: {
 					...defaultTheme.components.Heading.sizes[900],
 					marginTop: majorScale(4),
-					marginBottom: minorScale(1),
+					marginBottom: majorScale(1),
+					// borderBottomWidth: 1,
+					// borderBottomStyle: "solid",
+					// borderBottomColor: defaultTheme.colors.dark,
 				},
 				800: {
 					...defaultTheme.components.Heading.sizes[800],
 					marginTop: majorScale(3),
 					marginBottom: minorScale(1),
+					borderBottomWidth: 1,
+					borderBottomStyle: "solid",
+					borderBottomColor: defaultTheme.colors.muted,
 				},
-				700: {
-					...defaultTheme.components.Heading.sizes[700],
+				600: {
+					...defaultTheme.components.Heading.sizes[600],
 					marginTop: majorScale(2),
-					marginBottom: minorScale(1),
+					marginBottom: 0,
 				},
 			},
 		},
