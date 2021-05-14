@@ -1,0 +1,32 @@
+{
+	"name": "tasl.io",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"start": "next start"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/underlay/tasl.io.git"
+	},
+	"author": "Joel Gustafson",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/underlay/tasl.io/issues"
+	},
+	"homepage": "https://github.com/underlay/tasl.io#readme",
+	"dependencies": {
+		"evergreen-ui": "^6.0.0",
+		"next": "^10.2.0",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-markdown": "^6.0.2"
+	},
+	"devDependencies": {
+		"@types/react": "^17.0.5",
+		"typescript": "^4.2.4"
+	}
+}

@@ -1,0 +1,9 @@
+html {
+	background-color: seashell;
+}
+
+body {
+	padding: 24px;
+	max-width: 680px;
+	margin: 24px auto 48px auto;
+}
