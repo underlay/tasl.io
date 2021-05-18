@@ -1,0 +1,9 @@
+.heading {
+	.acronym {
+		display: none;
+		line-height: inherit;
+	}
+	&:hover .acronym {
+		display: initial;
+	}
+}

@@ -1,0 +1,19 @@
+html {
+	background-color: seashell;
+}
+
+body {
+	max-width: 1024px;
+	margin: 12px auto;
+	padding: 0 16px;
+}
+
+blockquote {
+	margin: 8px;
+}
+
+@media (min-width: 1024px) {
+	body {
+		margin: 48px auto;
+	}
+}

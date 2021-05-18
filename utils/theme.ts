@@ -1,5 +1,7 @@
 import { defaultTheme, majorScale, minorScale, Theme } from "evergreen-ui"
 
+import { merge } from "./merge"
+
 declare module "evergreen-ui" {
 	type ComponentPropGetter = (theme: Theme, props: {}) => number | string
 	type ComponentProp = number | string | ComponentPropGetter
@@ -7,6 +9,7 @@ declare module "evergreen-ui" {
 		string,
 		ComponentProp | Record<string, ComponentProp>
 	>
+
 	interface Component {
 		baseStyle: ComponentProps
 		appearances: Record<string, ComponentProps>
@@ -65,7 +68,47 @@ declare module "evergreen-ui" {
 	}
 }
 
-export const theme: Theme = {
+export const theme: Theme = merge(defaultTheme, {
+	components: {
+		Tab: {
+			appearances: {
+				secondary: {
+					borderRadius: 0,
+					margin: 0,
+					cursor: "pointer",
+					size: 300,
+					paddingX: majorScale(1),
+				},
+			},
+		},
+		Paragraph: {
+			baseStyle: {
+				marginBottom: majorScale(1),
+			},
+		},
+		Heading: {
+			sizes: {
+				900: {
+					marginBottom: majorScale(1),
+				},
+				800: {
+					marginTop: majorScale(3),
+					marginBottom: minorScale(1),
+					borderBottomWidth: 1,
+					borderBottomStyle: "solid",
+					borderBottomColor: defaultTheme.colors.muted,
+				},
+				500: {
+					marginTop: majorScale(2),
+					// marginBottom: 0,
+					// fontWeight: 500,
+				},
+			},
+		},
+	},
+})
+
+export const oldTheme: Theme = {
 	...defaultTheme,
 	components: {
 		...defaultTheme.components,
@@ -76,9 +119,6 @@ export const theme: Theme = {
 					...defaultTheme.components.Heading.sizes[900],
 					marginTop: majorScale(4),
 					marginBottom: majorScale(1),
-					// borderBottomWidth: 1,
-					// borderBottomStyle: "solid",
-					// borderBottomColor: defaultTheme.colors.dark,
 				},
 				800: {
 					...defaultTheme.components.Heading.sizes[800],

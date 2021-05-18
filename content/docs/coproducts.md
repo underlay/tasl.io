@@ -103,7 +103,7 @@ namespace ex http://example.com/
 class ex:IssueTicket {
   ex:title -> string;
   ex:content -> string;
-  ex:status -> [ ex:notStarted; ex:inProgress; ex:closed ]
+  ex:status -> [ ex:notStarted; ex:inProgress; ex:closed ];
 }
 ```
 

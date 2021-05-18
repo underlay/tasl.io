@@ -1,7 +1,3 @@
-# Schemas
-
-Schemas in the Underlay are written in a tiny algebraic schema language called tasl.
-
 A tasl _schema_ defines a set of _classes_. Each class is associated with a URI key and a _type_. A _type_ is one of six kinds of types:
 
 - a [literal type](schemas/literals)
