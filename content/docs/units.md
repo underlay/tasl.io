@@ -18,15 +18,9 @@ Understanding the unit type requires backing up and formalizing what a "type" re
 
 Let's first look at some familiar types represented as sets, and then come back to the unit type.
 
-### Bytes
-
 Lots of languages have a type called "byte" or similar. We can think of the type "byte" as the set of integers `{ 0, 1, 2, 3, ... 126, 127 }` (not a builtin-type in tasl but common in programming languages like C or whatever). The type byte is finite; it only has 128 elements.
 
-### Strings
-
 "strings" are another universally familiar type. We can think of the type "string" as the _set of all strings_. The type "string" is _infinite_. That's ok! We can still treat it as a set; it just has [uncountably many](https://en.wikipedia.org/wiki/Uncountable_set) elements.
-
-### Booleans
 
 We're also all familiar with a type called "boolean" that has just two elements - `true` and `false`.
 

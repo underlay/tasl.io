@@ -1,3 +1,5 @@
+# Documentation
+
 A tasl _schema_ defines a set of _classes_. Each class is associated with a URI key and a _type_. A _type_ is one of six kinds of types:
 
 - a [literal type](schemas/literals)
@@ -18,8 +20,6 @@ A schema has classes and types, and it only describes shapes. An _instance_ of a
 This diagram is an overview of the relationships between schemas, instances, classes, types, elements, and values. We'll unpack this a bit in the next couple sections.
 
 ![An overview of the relationships between schemas, instances, classes, types, elements, and values](/collection-diagram.svg)
-
-### Classes vs types
 
 You can think of classes as types that are given URI labels - the whole schema is just a map from URIs to types. In tasl, you can declare classes using the `class` keyword, followed by the URI label, followed by a type expression.
 
@@ -42,8 +42,6 @@ class ex:Person {
 ```
 
 Classes are types that are exported from the schema. The reason we have a different name for them is because some types are composed of other types, so sometimes "type" can refer to one of those child types (which don't have a URI label, etc). Classes are always top-level.
-
-### Elements vs values
 
 The class-vs-type distinction is mirrored on the instance side with _elements_, which instantiate classes, and _values_, which instantiate types. A collection version has a set of elements for each class in the schema; each element of a given class is associated with a value of the class type.
 

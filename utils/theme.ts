@@ -69,6 +69,17 @@ declare module "evergreen-ui" {
 }
 
 export const theme: Theme = merge(defaultTheme, {
+	fontFamilies: {
+		ui: "Athelas W01 Regular",
+		display: "Athelas W01 Regular",
+	},
+	fontWeights: {
+		light: "normal",
+		normal: "normal",
+		semibold: "normal",
+		bold: "normal",
+	},
+
 	components: {
 		Tab: {
 			appearances: {
@@ -84,6 +95,7 @@ export const theme: Theme = merge(defaultTheme, {
 		Paragraph: {
 			baseStyle: {
 				marginBottom: majorScale(1),
+				// fontSize: 18,
 			},
 		},
 		Heading: {
@@ -99,41 +111,9 @@ export const theme: Theme = merge(defaultTheme, {
 					borderBottomColor: defaultTheme.colors.muted,
 				},
 				500: {
-					marginTop: majorScale(2),
-					// marginBottom: 0,
-					// fontWeight: 500,
+					fontFamily: "Athelas W01 Bold",
 				},
 			},
 		},
 	},
 })
-
-export const oldTheme: Theme = {
-	...defaultTheme,
-	components: {
-		...defaultTheme.components,
-		Heading: {
-			...defaultTheme.components.Heading,
-			sizes: {
-				900: {
-					...defaultTheme.components.Heading.sizes[900],
-					marginTop: majorScale(4),
-					marginBottom: majorScale(1),
-				},
-				800: {
-					...defaultTheme.components.Heading.sizes[800],
-					marginTop: majorScale(3),
-					marginBottom: minorScale(1),
-					borderBottomWidth: 1,
-					borderBottomStyle: "solid",
-					borderBottomColor: defaultTheme.colors.muted,
-				},
-				600: {
-					...defaultTheme.components.Heading.sizes[600],
-					marginTop: majorScale(2),
-					marginBottom: 0,
-				},
-			},
-		},
-	},
-}

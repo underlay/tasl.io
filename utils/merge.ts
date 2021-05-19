@@ -5,7 +5,9 @@ export const merge = (target: any, source: any): any => ({
 	...target,
 	...Object.fromEntries(
 		Object.entries(source).map(([key, value]) =>
-			isObject(value) ? [key, merge(target[key], value)] : [key, value]
+			key in target && isObject(value)
+				? [key, merge(target[key], value)]
+				: [key, value]
 		)
 	),
 })

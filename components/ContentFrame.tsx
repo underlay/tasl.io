@@ -1,3 +1,4 @@
+import React from "react"
 import {
 	Heading,
 	majorScale,
@@ -7,12 +8,9 @@ import {
 	TabNavigation,
 } from "evergreen-ui"
 import { useRouter } from "next/router"
-import React from "react"
 
 import type { Page, PageProps } from "utils/page"
 import { theme } from "utils/theme"
-
-import styles from "./ContentFrame.module.scss"
 
 export interface ContentFrameProps extends PageProps {}
 
@@ -22,22 +20,21 @@ const ContentFrame: React.FC<ContentFrameProps> = (props) => {
 
 	return (
 		<Pane display="flex">
-			<Pane margin={majorScale(1)}>
-				<TabNavigation width={majorScale(18)}>
-					<Tab is="a" href="/" direction="vertical" isSelected={isRootSelected}>
-						<Heading size={400}>tasl</Heading>
-					</Tab>
-					{props.pages.map((page) => (
-						<Section key={page.slug} path="" page={page} />
-					))}
-					<Section path="" page={{ title: "playground", slug: "playground" }} />
-				</TabNavigation>
-				{/* <nav role="navigation" className={styles.nav}>
+			<TabNavigation padding={minorScale(1)} width={majorScale(18)}>
+				<Tab
+					is="a"
+					href="/"
+					direction="vertical"
+					isSelected={isRootSelected}
+					marginY={minorScale(1)}
+				>
+					<Heading size={500}>tasl</Heading>
+				</Tab>
 				{props.pages.map((page) => (
 					<Section key={page.slug} path="" page={page} />
 				))}
-			</nav> */}
-			</Pane>
+				<Section path="" page={{ title: "playground", slug: "playground" }} />
+			</TabNavigation>
 			<Pane marginX={majorScale(4)} flex={1}>
 				{props.children}
 			</Pane>
@@ -52,42 +49,35 @@ const Section: React.FC<{ path: string; page: Page }> = (props) => {
 	const isSelected = router.asPath === url
 	return (
 		<Pane
-			marginY={minorScale(1)}
-			paddingY={minorScale(1)}
+			marginBottom={minorScale(1)}
+			paddingTop={minorScale(1)}
 			borderTopColor={theme.colors.muted}
 			borderTopStyle="solid"
 			borderTopWidth={1}
 		>
-			{/* <Heading is="a" href={url}>
-				{props.page.title}
-			</Heading> */}
 			<Tab is="a" href={url} direction="vertical" isSelected={isSelected}>
-				<Heading size={400}>{props.page.title}</Heading>
+				<Heading size={500}>{props.page.title}</Heading>
 			</Tab>
 			{children.map((page) => (
-				<SubSection key={page.slug} path={url} page={page} />
+				<SectionPage key={page.slug} path={url} page={page} />
 			))}
 		</Pane>
 	)
 }
 
-const SubSection: React.FC<{ path: string; page: Page }> = (props) => {
+const SectionPage: React.FC<{ path: string; page: Page }> = (props) => {
 	const children = props.page.children || []
 	const url = `${props.path}/${props.page.slug}`
 	const router = useRouter()
 	const isSelected = router.asPath === url
 	return (
 		<>
-			{/* <Heading is="a" href={url}>
-				{props.page.title}
-			</Heading> */}
 			<Tab
 				is="a"
 				href={url}
 				direction="vertical"
 				isSelected={isSelected}
-				size={400}
-				fontWeight={400}
+				size={500}
 			>
 				{props.page.title}
 			</Tab>

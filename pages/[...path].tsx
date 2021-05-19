@@ -9,8 +9,6 @@ import {
 	OrderedList,
 	Pane,
 	Paragraph,
-	Strong,
-	Text,
 	UnorderedList,
 } from "evergreen-ui"
 
@@ -68,7 +66,7 @@ const h2: HeadingComponent = ({ children }) => (
 )
 
 const h3: HeadingComponent = ({ children }) => (
-	<Heading is="h3" size={500}>
+	<Heading is="h3" size={600}>
 		{children}
 	</Heading>
 )
@@ -86,7 +84,7 @@ const components: Components = {
 			<blockquote>{children}</blockquote>
 		</Pane>
 	),
-	p: ({ children }) => <Paragraph>{children}</Paragraph>,
+	p: ({ children }) => <Paragraph size={500}>{children}</Paragraph>,
 	code: ({ inline, children }) =>
 		inline ? (
 			<Code>{children}</Code>
@@ -95,11 +93,11 @@ const components: Components = {
 				{children}
 			</Pane>
 		),
-	em: ({ children }) => <Text is="em">{children}</Text>,
-	strong: ({ children }) => <Strong>{children}</Strong>,
+	em: ({ children }) => <em>{children}</em>,
+	strong: ({ children }) => <strong>{children}</strong>,
 	ul: ({ children }) => <UnorderedList>{children}</UnorderedList>,
 	ol: ({ children }) => <OrderedList>{children}</OrderedList>,
-	li: ({ children }) => <ListItem>{children}</ListItem>,
+	li: ({ children }) => <ListItem size={500}>{children}</ListItem>,
 	h1: h1,
 	h2: h2,
 	h3: h3,
