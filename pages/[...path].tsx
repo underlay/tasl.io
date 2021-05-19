@@ -1,6 +1,7 @@
 import React from "react"
 import type { GetStaticPaths, GetStaticProps } from "next"
 import {
+	Link,
 	Code,
 	Heading,
 	ListItem,
@@ -83,6 +84,11 @@ const components: Components = {
 		>
 			<blockquote>{children}</blockquote>
 		</Pane>
+	),
+	a: ({ children, href }) => (
+		<Link size={500} href={href as string}>
+			{children}
+		</Link>
 	),
 	p: ({ children }) => <Paragraph size={500}>{children}</Paragraph>,
 	code: ({ inline, children }) =>

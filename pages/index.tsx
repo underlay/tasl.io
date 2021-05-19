@@ -19,17 +19,22 @@ const Index: React.FC<IndexProps> = (props) => {
 				<Heading is="h1" size={900}>
 					tiny algebraic schema language
 				</Heading>
-				<Paragraph>
-					tasl is a{" "}
-					<Text fontStyle="italic">tiny algebraic schema language</Text>{" "}
-					designed for structuring datasets.
+				<Paragraph size={500}>
+					tasl is a <em>tiny algebraic schema language</em> designed for
+					structuring datasets.
 				</Paragraph>
-				<Paragraph>
+				<Paragraph size={500}>
 					It's built on patterns from RDF, the semantic web,{" "}
-					<Link href="https://en.wikipedia.org/wiki/Algebraic_data_type">
+					<Link
+						size={500}
+						href="https://en.wikipedia.org/wiki/Algebraic_data_type"
+					>
 						algebraic data types
 					</Link>
-					, and <Link href="https://arxiv.org/abs/1909.04881">this paper</Link>{" "}
+					, and{" "}
+					<Link size={500} href="https://arxiv.org/abs/1909.04881">
+						this paper
+					</Link>{" "}
 					on algebraic property graphs from Shinavier and Wisnesky.
 				</Paragraph>
 			</Pane>
