@@ -1,24 +1,24 @@
 @font-face {
 	font-family: "Athelas W01 Regular";
-	src: url("public/Fonts/904523/9d98c43c-eb88-46b7-ab0b-143e29ce5828.woff2")
+	src: url("/Fonts/904523/9d98c43c-eb88-46b7-ab0b-143e29ce5828.woff2")
 			format("woff2"),
-		url("public/Fonts/904523/547a938d-3d69-4437-bd70-d1c667bd5fe2.woff")
+		url("/Fonts/904523/547a938d-3d69-4437-bd70-d1c667bd5fe2.woff")
 			format("woff");
 }
 
 @font-face {
 	font-family: "Athelas W01 Bold";
-	src: url("public/Fonts/904526/079434e7-2c5f-49b2-b9c3-108e30c54b35.woff2")
+	src: url("/Fonts/904526/079434e7-2c5f-49b2-b9c3-108e30c54b35.woff2")
 			format("woff2"),
-		url("public/Fonts/904526/41e549e0-1212-4a1d-bf2c-ff9b9b0b39e8.woff")
+		url("/Fonts/904526/41e549e0-1212-4a1d-bf2c-ff9b9b0b39e8.woff")
 			format("woff");
 }
 
 @font-face {
 	font-family: "Athelas W01 Italic";
-	src: url("public/Fonts/904532/dff56a2b-9f6c-41c3-9b8d-49415b53abd8.woff2")
+	src: url("/Fonts/904532/dff56a2b-9f6c-41c3-9b8d-49415b53abd8.woff2")
 			format("woff2"),
-		url("public/Fonts/904532/6d2f4b27-072b-491b-9916-67c3e599d9be.woff")
+		url("/Fonts/904532/6d2f4b27-072b-491b-9916-67c3e599d9be.woff")
 			format("woff");
 }
 
