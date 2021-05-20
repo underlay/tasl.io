@@ -1,4 +1,4 @@
-# The URI Type
+# the URI type
 
 In addition to literals, tasl schemas have a separate kind of primitive type for URIs. Here, we're not talking about the URIs that we use _in_ schemas to label classes, properties, and datatypes - we're talking about a simple, single type called "uri" that we use as a type for URI values in datasets. If you have a bunch of URI values in your dataset, you want to use the URI type in your schema.
 

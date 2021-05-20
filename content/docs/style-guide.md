@@ -1,4 +1,4 @@
-# Style Guide
+# style guide
 
 (under construction)
 

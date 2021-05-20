@@ -1,4 +1,4 @@
-# Namespaces and URIs
+# namespaces
 
 tasl schemas use _URIs_ from _namespaces_ to identify things.
 
@@ -17,7 +17,7 @@ namespace rdf http://www.w3.org/1999/02/22-rdf-syntax-ns#
 
 "Declaring a namespace" means giving it a short, local prefix - `s`, `ex`, and `rdf` in the example. When we actually use terms from the namespace, we'll always use this short prefix instead of the full base URI. For example, we'd write `s:Person` (which "expands" to `http://schema.org/Person`) or `ex:favoriteColor` (which "expands" to `http://example.com/ns#favoriteColor`), and so on. The prefixes that you give to namespaces are only scoped to each individual tasl file, and they can be whatever you want them to be, as long as they only consist of letters and numbers.
 
-## Using your own namespace
+## using your own namespace
 
 The easiest (and _safest_) way to get started writing schemas is to use your own namespace. You don't even have to actually _do_ anything to "create a namespace" - you don't have to run a server, or publish it anywhere, or tell anybody. You can just pick a URL that you own and start using it:
 
@@ -41,7 +41,7 @@ Some namespace naming tips:
 - use a domain name that you have authority over
 - pick something that feels stable to you
 
-## Using terms from existing namespaces
+## using terms from existing namespaces
 
 There’s another way for people to agree on how to use a URI consistently - somebody can create a namespace, list and document a vocabulary of terms in that namespace in a human-readable format, and then everybody can just follow that.
 

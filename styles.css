@@ -24,16 +24,23 @@
 
 html {
 	background-color: seashell;
+	text-size-adjust: none;
+	-webkit-text-size-adjust: none;
 }
 
 body {
-	width: 824px;
+	max-width: 824px;
+	min-width: 600px;
 	margin: 48px auto;
-	padding: 0 16px;
 }
 
 blockquote {
 	margin: 8px;
+}
+
+pre {
+	font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+	font-size: 14px;
 }
 
 strong {

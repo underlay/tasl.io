@@ -26,6 +26,7 @@ export default class extends Document<DocumentProps> {
 			<Html>
 				<Head>
 					<style dangerouslySetInnerHTML={{ __html: css }} />
+					<meta name="viewport" content="width=device-width, initial-scale=1" />
 					<link
 						rel="preload"
 						href="/Fonts/904523/9d98c43c-eb88-46b7-ab0b-143e29ce5828.woff2"

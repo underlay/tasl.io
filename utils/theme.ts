@@ -72,6 +72,7 @@ export const theme: Theme = merge(defaultTheme, {
 	fontFamilies: {
 		ui: "Athelas W01 Regular",
 		display: "Athelas W01 Regular",
+		mono: "SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace",
 	},
 	fontWeights: {
 		light: "normal",
@@ -95,7 +96,6 @@ export const theme: Theme = merge(defaultTheme, {
 		Paragraph: {
 			baseStyle: {
 				marginBottom: majorScale(1),
-				// fontSize: 18,
 			},
 		},
 		Heading: {

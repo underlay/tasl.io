@@ -4,7 +4,7 @@ _Coproduct types_ are the other kind of composite types in tasl. They're also kn
 
 > Coproducts correspond to the idea of "OR" or _alternatives_.
 
-Similar to product types, coproduct types map URI keys to types, but they're written using square brackets `[ ]` and inside-out arrows `>-`. We call the slots of a coproduct type its _options_. The two parts of each option are its _key_ (the URI) and its _value_ (the type).
+Similar to product types, coproduct types map URI keys to types, but they're written using square brackets `[]` and inside-out arrows `>-`. We call the slots of a coproduct type its _options_. The two parts of each option are its _key_ (the URI) and its _value_ (the type).
 
 Use coproducts when you need to model a value that can be one of several different conceptual options:
 
@@ -78,9 +78,9 @@ class ex:IssueTicket {
   ex:title -> string;
   ex:content -> string;
   ex:status -> [
-    ex:notStarted >- !;
-    ex:inProgress >- !;
-    ex:closed >- !;
+    ex:notStarted >- {};
+    ex:inProgress >- {};
+    ex:closed >- {};
   ]
 }
 ```
@@ -95,7 +95,7 @@ Unit types only have one possible value: the unit value. This means there are on
 
 The value `<the unit value>` is redundant; the only information that a value of the `ex:status` coproduct carries is its URI option tag. What we're really representing is an [_enumerated type_](https://en.wikipedia.org/wiki/Enumerated_type) (aka an _enum_) where the enumerations are the option tags.
 
-In tasl, you can abbreviate a coproduct of units by ommitting the `>- !` entirely, like this:
+In tasl, you can abbreviate a coproduct of units by ommitting the `>- {}` entirely, like this:
 
 ```tasl
 namespace ex http://example.com/
@@ -162,7 +162,7 @@ namespace ex http://example.com/
 class ex:Person {
   ex:name -> string;
   ex:favoriteBook -> [
-    ex:doesNotHaveAFavoriteBook >- !;
+    ex:doesNotHaveAFavoriteBook >- {};
     ex:hasAFavoriteBook >- * ex:Book;
   ]
 }
@@ -173,7 +173,7 @@ class ex:Book {
 }
 ```
 
-This kind of structure - a coproduct of a unit and something else - is so common that tasl has a special shorthand syntax for it. In tasl, the _optional operator_ `? (type)` expands to a coproduct `[ ul:some >- (type); ul:none >- !]`. This is really convenient because it means we don't have to worry about naming the two options `ex:doesNotHaveAFavoriteBook` and `ex:hasAFavoriteBook`, we can just write:
+This kind of structure - a coproduct of a unit and something else - is so common that tasl has a special shorthand syntax for it. In tasl, the _optional operator_ `? (type)` expands to a coproduct `[ ul:some >- (type); ul:none >- {}]`. This is really convenient because it means we don't have to worry about naming the two options `ex:doesNotHaveAFavoriteBook` and `ex:hasAFavoriteBook`, we can just write:
 
 ```tasl
 namespace ex http://example.com/

@@ -1,4 +1,4 @@
-# Example schemas
+# example schemas
 
 (under construction)
 

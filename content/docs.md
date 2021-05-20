@@ -1,4 +1,4 @@
-# Documentation
+# documentation
 
 A tasl _schema_ defines a set of _classes_. Each class is associated with a URI key and a _type_. A _type_ is one of six kinds of types:
 
@@ -15,11 +15,9 @@ Each kind of type corresponds to its own kind of _value_. You can think of each 
 
 A schema has classes and types, and it only describes shapes. An _instance_ of a schema has _elements_ and _values_, which all fit the corresponding shapes of a particular schema. On R1, we develop schemas and collections separately. A version of a schema just defines a set of classes and types. A version of a collection links to a version of a schema, and contains an instance of that schema version.
 
-## Classes, Types, Elements, and Values
+## classes, types, elements, and values
 
 This diagram is an overview of the relationships between schemas, instances, classes, types, elements, and values. We'll unpack this a bit in the next couple sections.
-
-![An overview of the relationships between schemas, instances, classes, types, elements, and values](/collection-diagram.svg)
 
 You can think of classes as types that are given URI labels - the whole schema is just a map from URIs to types. In tasl, you can declare classes using the `class` keyword, followed by the URI label, followed by a type expression.
 
@@ -47,7 +45,7 @@ The class-vs-type distinction is mirrored on the instance side with _elements_, 
 
 The important thing to remember is that _identity_ is held by **elements**. This means that you can have as many different elements of the same class as you want, even if they all have the "same" value. But by default, there's no externally-accessible way of identifying individual elements - they don't automatically have UUIDs or anything.
 
-## Algebraic!?
+## algebraic!?
 
 We say that tasl is a tiny algebraic schema language. What does "algebraic" mean here?
 

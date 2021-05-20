@@ -1,9 +1,9 @@
-# The Unit Type
+# the unit type
 
-The _unit type_ in tasl is written with an exclamation mark `!`. For convenience, you can also use the global variable `unit`, which is defined like this:
+The _unit type_ in tasl is written with an exclamation mark `{}`. For convenience, you can also use the global variable `unit`, which is defined like this:
 
 ```tasl
-type unit !
+type unit {}
 ```
 
 > Units correspond to the idea of "null" or a _placeholder_.
@@ -45,7 +45,7 @@ One way that unit types are useful "on their own" is in modeling _nodes_ in a gr
 ```tasl
 namespace ex http://example.com/
 
-class ex:Node !
+class ex:Node {}
 
 class ex:Edge {
   ex:source -> * ex:Node;

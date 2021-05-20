@@ -1,4 +1,4 @@
-# Reference Types
+# reference types
 
 The last kind of type that we have in tasl is _reference types_. A reference type points to a class in the same schema. We write them with an asterisk followed by the class URI. We've already seen several of them in action:
 

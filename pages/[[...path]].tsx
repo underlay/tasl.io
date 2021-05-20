@@ -27,7 +27,7 @@ import { getPages, getPaths } from "utils/getPages"
 import { PageProps } from "utils/page"
 import { theme } from "utils/theme"
 
-type ContentPageParams = { path: string[] }
+type ContentPageParams = { path?: string[] }
 
 interface ContentPageProps extends PageProps {
 	content: string
@@ -35,7 +35,11 @@ interface ContentPageProps extends PageProps {
 
 export const getStaticPaths: GetStaticPaths<ContentPageParams> = async ({}) => {
 	const pages = getPages()
-	const paths = [...getPaths([], pages)]
+	const paths: { params: ContentPageParams }[] = [
+		{ params: { path: [] } },
+		...getPaths([], pages),
+	]
+
 	return { paths, fallback: false }
 }
 
@@ -48,7 +52,8 @@ export const getStaticProps: GetStaticProps<
 	}
 
 	const { path } = context.params
-	const file = resolve("content", `${path.join("/")}.md`)
+	const name = path ? `${path.join("/")}.md` : "index.md"
+	const file = resolve("content", name)
 	const content = readFileSync(file, "utf-8")
 	const pages = getPages()
 	return { props: { content, pages } }
@@ -62,12 +67,6 @@ const h1: HeadingComponent = ({ children }) => (
 
 const h2: HeadingComponent = ({ children }) => (
 	<Heading is="h2" size={800}>
-		{children}
-	</Heading>
-)
-
-const h3: HeadingComponent = ({ children }) => (
-	<Heading is="h3" size={600}>
 		{children}
 	</Heading>
 )
@@ -91,7 +90,7 @@ const components: Components = {
 		</Link>
 	),
 	p: ({ children }) => <Paragraph size={500}>{children}</Paragraph>,
-	code: ({ inline, children }) =>
+	code: ({ inline, children, ...rest }) =>
 		inline ? (
 			<Code>{children}</Code>
 		) : (
@@ -106,10 +105,10 @@ const components: Components = {
 	li: ({ children }) => <ListItem size={500}>{children}</ListItem>,
 	h1: h1,
 	h2: h2,
-	h3: h3,
-	h4: h3,
-	h5: h3,
-	h6: h3,
+	h3: h2,
+	h4: h2,
+	h5: h2,
+	h6: h2,
 }
 
 const ContentPage: React.FC<ContentPageProps> = (props) => {

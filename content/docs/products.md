@@ -1,10 +1,10 @@
-# Product Types
+# product types
 
 _Product types_ are one of the two composite types in tasl - that means they're one of the ways that we can build "bigger" types out of smaller ones. In other contexts, they're also called _structs_, _maps_, _records_, _tuples_, _vectors_, or _objects_.
 
 > Product types correspond to the idea of "AND" or _combination_.
 
-A product type is written as map from URI keys to types, using curly braces `{ }`, arrows `->`, and semicolons. We call the slots of a product type its _components_, and the two parts of each component are its _key_ (the URI) and its _value_ (the type). It's sometimes confusing to use the word "value" to refer to the type that a component maps to, but usually there's enough context to tell whether "value" means a type-in-a-component or an actual concrete instance-of-a-type value.
+A product type is written as map from URI keys to types, using curly braces `{}`, arrows `->`, and semicolons. We call the slots of a product type its _components_, and the two parts of each component are its _key_ (the URI) and its _value_ (the type). It's sometimes confusing to use the word "value" to refer to the type that a component maps to, but usually there's enough context to tell whether "value" means a type-in-a-component or an actual concrete instance-of-a-type value.
 
 We've already seen several product types in action:
 
