@@ -229,4 +229,4 @@ class ex:Book {
 
 The full URIs that the optional operator uses for its option keys are `http://underlay.org/ns/some` and `http://underlay.org/ns/none`, but we canonically abbreviate them using the `ul` prefix. You don't have to declare this namespace in your schema in order to use the optional operator, but it good to keep in mind that the option keys are still there, they're just hidden defaults.
 
-You should use the optional operator whenever a value might or might not exist. In some schemas, you might end up using the optional operator for almost everywhere. But don't make an automatic habit out of making things optional - it's good to explicitly say that things are required whenever they really are.
+You should use the optional operator whenever a value might or might not exist. In some schemas, you might end up using the optional operator almost everywhere. But don't make an automatic habit out of making things optional - it's good to explicitly say that things are required whenever they really are.
