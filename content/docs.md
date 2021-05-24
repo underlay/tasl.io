@@ -24,7 +24,7 @@ You can think of classes as types that are given URI labels - the whole schema i
 ```tasl
 namespace ex http://example.com/
 
-class ex:Thing !
+class ex:Thing :: {}
 ```
 
 Here, we declare a class with a URI `ex:Thing` and a type `!` (this is the [Unit type](schemas/units), which we'll explain later). Other classes can have more complex types:
@@ -32,10 +32,13 @@ Here, we declare a class with a URI `ex:Thing` and a type `!` (this is the [Unit
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person {
-  ex:name -> string;
-  ex:bestFriend -> ? * ex:Person;
-  ex:favoriteColor -> [ ex:red; ex:green ];
+class ex:Person :: {
+  ex:name -> string
+  ex:bestFriend -> ? * ex:Person
+  ex:favoriteColor -> [
+    ex:red
+    ex:green
+  ]
 }
 ```
 

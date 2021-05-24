@@ -5,14 +5,14 @@ The last kind of type that we have in tasl is _reference types_. A reference typ
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person {
-  ex:name -> string;
-  ex:favoriteBook -> ? * ex:Book;
+class ex:Person :: {
+  ex:name -> string
+  ex:favoriteBook -> ? * ex:Book
 }
 
-class ex:Book {
-  ex:title -> string;
-  ex:isbn -> <>;
+class ex:Book :: {
+  ex:title -> string
+  ex:isbn -> <>
 }
 ```
 
@@ -31,12 +31,12 @@ Often you'll be faced with a choice between inlining a type and splitting it out
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person {
-  ex:name -> string;
+class ex:Person :: {
+  ex:name -> string
   ex:favoriteBook -> ? {
-    ex:title -> string;
-    ex:isbn -> <>;
-  };
+    ex:title -> string
+    ex:isbn -> <>
+  }
 }
 ```
 
@@ -54,9 +54,9 @@ One common way that we use references is to model properties that can have multp
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person {
-  ex:age -> integer;
-  ex:name -> string;
+class ex:Person :: {
+  ex:age -> integer
+  ex:name -> string
 }
 ```
 
@@ -65,9 +65,9 @@ class ex:Person {
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person {
-  ex:age -> integer;
-  ex:name -> ? string;
+class ex:Person :: {
+  ex:age -> integer
+  ex:name -> ? string
 }
 ```
 
@@ -76,13 +76,13 @@ class ex:Person {
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person {
-  ex:age -> integer;
+class ex:Person :: {
+  ex:age -> integer
 }
 
-class ex:Person/name {
-  ex:person -> * ex:Person;
-  ex:name -> string;
+class ex:Person/name :: {
+  ex:person -> * ex:Person
+  ex:name -> string
 }
 ```
 
@@ -97,11 +97,11 @@ Another useful general pattern is to use references to unit classes as a way to 
 ```tasl
 namespace ex http://example.com/
 
-class ex:Node !
+class ex:Node :: {}
 
-class ex:Edge {
-  ex:source -> * ex:Node;
-  ex:target -> * ex:Node;
+class ex:Edge :: {
+  ex:source -> * ex:Node
+  ex:target -> * ex:Node
 }
 ```
 
@@ -112,13 +112,13 @@ But let's say we wanted to turn this schema into a [hypergraph data model](https
 ```tasl
 namespace ex http://example.com/
 
-class ex:Node !
+class ex:Node :: {}
 
-class ex:Hyperedge !
+class ex:Hyperedge :: {}
 
-class ex:Hyperedge/includes {
-  ex:edge -> * ex:Hyperedge;
-  ex:node -> * ex:Node;
+class ex:Hyperedge/includes :: {
+  ex:edge -> * ex:Hyperedge
+  ex:node -> * ex:Node
 }
 ```
 
@@ -131,7 +131,7 @@ Technically, you can even define a class to be a reference to itself:
 ```tasl
 namespace ex http://example.com/
 
-class ex:Useless * ex:Useless
+class ex:Useless :: * ex:Useless
 ```
 
 ... although this structure isn't very useful. An instance of this schema could have arbitrarly many elements of the `ex:Useless` class; each one would have to point to another (or itself).
@@ -141,13 +141,13 @@ Here's a more interesting kind of self-reference:
 ```tasl
 namespace ex http://example.com/
 
-class ex:ListOfIntegers ? {
-  ul:head -> integer;
-  ul:tail -> * ex:ListOfIntegers;
+class ex:ListOfIntegers :: ? {
+  ex:head -> integer
+  ex:tail -> * ex:ListOfIntegers
 }
 ```
 
-The class `ex:ListOfIntegers` is either nothing - the `ul:none` option of the `?` coproduct - or (in the `ul:some` option of the `?` coproduct) a product of two components: an `integer` and a pointer to another `ex:ListOfIntegers` element. This means that an element of `ex:ListOfIntegers` is either null (the empty list) or an integer and another element.
+The class `ex:ListOfIntegers` is either nothing - the `ex:none` option of the `?` coproduct - or (in the `ex:some` option of the `?` coproduct) a product of two components: an `integer` and a pointer to another `ex:ListOfIntegers` element. This means that an element of `ex:ListOfIntegers` is either null (the empty list) or an integer and another element.
 
 As the name implies, this effectively models a [linked list](https://en.wikipedia.org/wiki/Linked_list) of integers. There's no generic "list" type in tasl; if we need lists we have to roll our own linked list class for the particular type that we want (although this is discouraged, which we'll talk about later).
 
@@ -156,12 +156,12 @@ If we wanted to model _non-empty_ linked lists, we could tweak our class declara
 ```tasl
 namespace ex http://example.com/
 
-class ex:ListOfIntegers {
-  ul:head -> integer;
-  ul:tail -> ? * ex:ListOfIntegers;
+class ex:ListOfIntegers :: {
+  ex:head -> integer
+  ex:tail -> ? * ex:ListOfIntegers
 }
 ```
 
-... here we moved the optional operator from the top level to the `ul:tail` component. This means that now every element has to have an integer `ul:head` value, and can optionally link to another element.
+... here we moved the optional operator from the top level to the `ex:tail` component. This means that now every element has to have an integer `ex:head` value, and can optionally link to another element.
 
 Again, the purpose of this example is just to illustrate how references work. Making linked lists with schemas is discouraged, and using this non-empty linked list structure to enforce a "one or more" constraint on an otherwise-unordered multi-valued property is even more strongly discouraged.

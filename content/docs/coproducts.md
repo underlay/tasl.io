@@ -4,22 +4,24 @@ _Coproduct types_ are the other kind of composite types in tasl. They're also kn
 
 > Coproducts correspond to the idea of "OR" or _alternatives_.
 
-Similar to product types, coproduct types map URI keys to types, but they're written using square brackets `[]` and inside-out arrows `>-`. We call the slots of a coproduct type its _options_. The two parts of each option are its _key_ (the URI) and its _value_ (the type).
+Similar to product types, coproduct types map URI keys to types, but they're written using square brackets `[]` and left arrows `<-`. We call the slots of a coproduct type its _options_. The two parts of each option are its _key_ (the URI) and its _value_ (the type).
+
+Just like products, the options of a coproduct have to be on their own line.
 
 Use coproducts when you need to model a value that can be one of several different conceptual options:
 
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person {
-  ex:name -> string;
+class ex:Person :: {
+  ex:name -> string
 }
 
-class ex:Corporation {
-  ex:name -> string;
+class ex:Corporation :: {
+  ex:name -> string
   ex:ownedBy -> [
-    ex:ownedByPerson >- * ex:Person;
-    ex:ownedByCorporation >- * ex:Corporation;
+    ex:ownedByPerson <- * ex:Person
+    ex:ownedByCorporation <- * ex:Corporation
   ]
 }
 ```
@@ -31,21 +33,22 @@ Here's a slightly different example, where a coproduct is used to represent mult
 ```tasl
 namespace ex http://example.com/
 
-class ex:BookStore {
-  ex:name -> string;
+class ex:BookStore :: {
+  ex:name -> string
   ex:location -> [
-  ex:locationCoordinates >- {
-    ex:lat -> double;
-    ex:long -> double
-  };
-  ex:locationAddress >- {
-    ex:street -> string;
-    ex:city -> string;
-    ex:state -> string;
-    ex:zipCode -> string;
-    };
+    ex:coordinates <- {
+      ex:lat -> double
+      ex:long -> double
+    }
+    ex:address <- {
+      ex:street -> string
+      ex:city -> string
+      ex:state -> string
+      ex:zipCode -> string
+    }
   ]
 }
+
 ```
 
 A value of a coproduct type has a value for exactly **one** of its options, _and it also knows explicitly which option it is_. This is different than regular _union types_, which are more common in programming langauges. For example, in TypeScript, this type:
@@ -60,12 +63,12 @@ type hello = string | string
 namespace ex http://example.com/
 
 type hello [
-  ex:one >- string;
-  ex:two >- string;
+  ex:a <- string
+  ex:b <- string
 ]
 ```
 
-a value of type `hello` will be a string tagged with an option key: something like `(ex:one, "world")` or `(ex:two, "world")`. This is why coproduct are also called _tagged unions_.
+a value of type `hello` will be a string tagged with an option key: something like `(ex:a, "world")` or `(ex:b, "world")`. This is why coproduct are also called _tagged unions_.
 
 ## Enums
 
@@ -74,13 +77,13 @@ One really powerful way to use coproducts is to make a "coproduct of units":
 ```tasl
 namespace ex http://example.com/
 
-class ex:IssueTicket {
-  ex:title -> string;
-  ex:content -> string;
+class ex:IssueTicket :: {
+  ex:title -> string
+  ex:content -> string
   ex:status -> [
-    ex:notStarted >- {};
-    ex:inProgress >- {};
-    ex:closed >- {};
+    ex:notStarted <- {}
+    ex:inProgress <- {}
+    ex:closed <- {}
   ]
 }
 ```
@@ -100,30 +103,46 @@ In tasl, you can abbreviate a coproduct of units by ommitting the `>- {}` entire
 ```tasl
 namespace ex http://example.com/
 
-class ex:IssueTicket {
-  ex:title -> string;
-  ex:content -> string;
-  ex:status -> [ ex:notStarted; ex:inProgress; ex:closed ];
+class ex:IssueTicket :: {
+  ex:title -> string
+  ex:content -> string
+  ex:status -> [
+    ex:notStarted
+    ex:inProgress
+    ex:closed
+  ]
 }
 ```
 
-You can only do this for coproducts. `{ ex:foo; ex:bar }` is not valid tasl.
+You can only do this for coproducts. For example,
 
-Sometimes you want to create a sort of hybrid enum type that has data associated with some of the options, but not all. You can still use the abbreviated syntax for any unit options, and use the expanded `>-` syntax for the options you want to associate with other types:
+```
+namespace ex http://example.com/
+
+type test {
+  ex:hello
+}
+```
+
+is not valid tasl.
+
+Sometimes you want to create a sort of hybrid enum type that has data associated with some of the options, but not all. You can still use the abbreviated syntax for any unit options, and use the expanded `<-` syntax for the options you want to associate with other types:
 
 ```tasl
 namespace ex http://example.com/
 
-class ex:IssueTicket {
-  ex:title -> string;
-  ex:content -> string;
+class ex:IssueTicket :: {
+  ex:title -> string
+  ex:content -> string
   ex:status -> [
-    ex:notStarted;
-    ex:inProgress >- { ex:startDate -> dateTime};
-    ex:closed >- {
-      ex:startDate -> dateTime;
-      ex:endDate -> dateTime;
-    };
+    ex:notStarted
+    ex:inProgress <- {
+      ex:startDate -> dateTime
+    }
+    ex:closed <- {
+      ex:startDate -> dateTime
+      ex:endDate -> dateTime
+    }
   ]
 }
 ```
@@ -133,9 +152,9 @@ You should use enums as much as possible. They're appropriate for anything that 
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person {
-  ex:name -> string;
-  ex:isDeceased -> boolean;
+class ex:Person :: {
+  ex:name -> string
+  ex:isDeceased -> boolean
 }
 ```
 
@@ -144,9 +163,12 @@ class ex:Person {
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person {
-  ex:name -> string;
-  ex:status -> [ex:living; ex:deceased];
+class ex:Person :: {
+  ex:name -> string
+  ex:status -> [
+    ex:living
+    ex:deceased
+  ]
 }
 ```
 
@@ -160,20 +182,29 @@ We can use the coproduct + unit pattern to model _optional properties_. Here we 
 namespace ex http://example.com/
 
 class ex:Person {
-  ex:name -> string;
+  ex:name -> string
   ex:favoriteBook -> [
-    ex:doesNotHaveAFavoriteBook >- {};
-    ex:hasAFavoriteBook >- * ex:Book;
+    ex:doesNotHaveAFavoriteBook <- {}
+    ex:hasAFavoriteBook <- * ex:Book
   ]
 }
 
 class ex:Book {
-  ex:title -> string;
-  ex:isbn -> <>;
+  ex:title -> string
+  ex:isbn -> <>
 }
 ```
 
-This kind of structure - a coproduct of a unit and something else - is so common that tasl has a special shorthand syntax for it. In tasl, the _optional operator_ `? (type)` expands to a coproduct `[ ul:some >- (type); ul:none >- {}]`. This is really convenient because it means we don't have to worry about naming the two options `ex:doesNotHaveAFavoriteBook` and `ex:hasAFavoriteBook`, we can just write:
+This kind of structure - a coproduct of a unit and something else - is so common that tasl has a special shorthand syntax for it. In tasl, the _optional operator_ `? (type)` expands to a coproduct
+
+```
+[
+  ul:none <- {}
+  ul:some <- (type)
+]
+```
+
+This is really convenient because it means we don't have to worry about naming the two options `ex:doesNotHaveAFavoriteBook` and `ex:hasAFavoriteBook`, we can just write:
 
 ```tasl
 namespace ex http://example.com/
@@ -182,14 +213,17 @@ class ex:Person {
   ex:name -> string;
 
   # the `?` is the optional operator.
-  # it turns the type `* ex:Book` into
-  # the type `[ul:none; ul:some >- * ex:Book]`.
-  ex:favoriteBook -> ? * ex:Book;
+  # it turns the type `* ex:Book` into the type
+  # [
+  #   ul:none
+  #   ul:some <- * ex:Book
+  # ]
+  ex:favoriteBook -> ? * ex:Book
 }
 
 class ex:Book {
-  ex:title -> string;
-  ex:isbn -> <>;
+  ex:title -> string
+  ex:isbn -> <>
 }
 ```
 

@@ -21,9 +21,9 @@ In tasl, instead of keywords like `string`, we use URIs wrapped in angle bracket
 namespace ex http://example.com/
 namespace xsd http://www.w3.org/2001/XMLSchema#
 
-class ex:Person {
-  ex:name -> <xsd:string>;
-  ex:age -> <xsd:integer>;
+class ex:Person :: {
+  ex:name -> <xsd:string>
+  ex:age -> <xsd:integer>
 }
 ```
 
@@ -64,9 +64,9 @@ This means you don't have to remember to include the XSD namespace in every sche
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person {
-  ex:name -> string;
-  ex:age -> integer;
+class ex:Person :: {
+  ex:name -> string
+  ex:age -> integer
 }
 ```
 
@@ -81,8 +81,8 @@ namespace xsd http://www.w3.org/2001/XMLSchema#
 namespace ex http://example.com/
 
 class ex:Person {
-  ex:name -> string;
-  ex:age -> <xsd:nonNegativeInteger>;
+  ex:name -> string
+  ex:age -> <xsd:nonNegativeInteger>
 }
 ```
 

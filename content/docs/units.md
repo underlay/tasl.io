@@ -45,11 +45,11 @@ One way that unit types are useful "on their own" is in modeling _nodes_ in a gr
 ```tasl
 namespace ex http://example.com/
 
-class ex:Node {}
+class ex:Node :: {}
 
-class ex:Edge {
-  ex:source -> * ex:Node;
-  ex:target -> * ex:Node;
+class ex:Edge :: {
+  ex:source -> * ex:Node
+  ex:target -> * ex:Node
 }
 ```
 
