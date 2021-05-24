@@ -98,7 +98,7 @@ Unit types only have one possible value: the unit value. This means there are on
 
 The value `<the unit value>` is redundant; the only information that a value of the `ex:status` coproduct carries is its URI option tag. What we're really representing is an [_enumerated type_](https://en.wikipedia.org/wiki/Enumerated_type) (aka an _enum_) where the enumerations are the option tags.
 
-In tasl, you can abbreviate a coproduct of units by ommitting the `>- {}` entirely, like this:
+In tasl, you can abbreviate a coproduct of units by ommitting the `<- {}` entirely, like this:
 
 ```tasl
 namespace ex http://example.com/
@@ -210,7 +210,7 @@ This is really convenient because it means we don't have to worry about naming t
 namespace ex http://example.com/
 
 class ex:Person {
-  ex:name -> string;
+  ex:name -> string
 
   # the `?` is the optional operator.
   # it turns the type `* ex:Book` into the type
