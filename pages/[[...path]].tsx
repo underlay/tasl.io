@@ -33,6 +33,10 @@ interface ContentPageProps extends PageProps {
 	content: string
 }
 
+export const config = {
+	unstable_runtimeJS: false,
+}
+
 export const getStaticPaths: GetStaticPaths<ContentPageParams> = async ({}) => {
 	const pages = getPages()
 	const paths: { params: ContentPageParams }[] = [

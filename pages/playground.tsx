@@ -1,13 +1,14 @@
 import React, { useCallback } from "react"
 
 import { GetStaticProps } from "next"
+import { majorScale, Pane } from "evergreen-ui"
 
 import Editor from "components/Editor"
+import ContentFrame from "components/ContentFrame"
+
 import { initialValue } from "utils/initialValue"
 import { PageProps } from "utils/page"
 import { getPages } from "utils/getPages"
-import ContentFrame from "components/ContentFrame"
-import { majorScale, Pane } from "evergreen-ui"
 
 export const getStaticProps: GetStaticProps<PlaygroundProps, PlaygroundParams> =
 	async ({}) => ({ props: { pages: getPages() } })

@@ -72,7 +72,7 @@ export const theme: Theme = merge(defaultTheme, {
 	fontFamilies: {
 		ui: "Athelas W01 Regular",
 		display: "Athelas W01 Regular",
-		mono: "SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace",
+		mono: '"Fira Code", monospace',
 	},
 	fontWeights: {
 		light: "normal",
