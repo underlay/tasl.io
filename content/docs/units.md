@@ -10,7 +10,7 @@ type unit {}
 
 The unit type is a little unintuitive. You can either think of it as a primitive type, or as an "empty" product type. In some ways it resembles a "null" type; in other contexts it can be used to indicate "nodes" or a raw concept of "identity".
 
-## Types as Sets
+## types as sets
 
 Understanding the unit type requires backing up and formalizing what a "type" really _is_ in the first place. Fortunately, this is easier than it sounds: a type is just a [_set_](<https://en.wikipedia.org/wiki/Set_(mathematics)>). We can treat any type as a set, and any set as a type. There's no difference between a "type" and the **set of possible values** of that type.
 
@@ -28,7 +28,7 @@ One interesting observation that the boolean type highlights (it's true for all 
 
 Now let's get back to the unit type.
 
-## The Unit Type is a Set with Just One Element
+## the unit type is a set with just one element
 
 The [unit type](https://en.wikipedia.org/wiki/Unit_type) is this set: `{ <the unit value> }`. It's a set with only one element. For now, let's call that element "the unit value".
 
@@ -38,7 +38,7 @@ This weird situation - never needing to distinguish the unit value from other va
 
 What we _can_ say about the unit type is that it "carries no information". If you use the unit type somewhere in a schema, instances of that schema can only have that one, singular unit value in that location.
 
-## Example: Unit Classes as Nodes
+## unit classes as nodes
 
 One way that unit types are useful "on their own" is in modeling _nodes_ in a graph.
 

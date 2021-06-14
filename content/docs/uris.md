@@ -46,7 +46,7 @@ class ex:Book :: {
 
 _You should try to use URIs as much as you can_, even if you wouldn't immediately think of the value as a URI. Here are a few ways of URI-ifying things:
 
-## Specific URI schemes
+## specific URI schemes
 
 The very first part of a URI is called the URI _scheme_. `http` is a URI scheme. `mailto` is a URI scheme. `file` is a URI scheme.
 
@@ -141,7 +141,7 @@ Good URLs:
 
 If the URL has a page title, name, or is just a path like `http://example.com/folder1/folder2/file`, it's probably not a good URI value.
 
-## What about actual URLs?
+## what about actual URLs?
 
 So if URLs in the "this links to a webpage" sense make bad URIs, how _should_ we model webpage links? This is obviously an extremely common kind of value!
 
@@ -164,7 +164,7 @@ class imdb:Movie :: {
 
 Don't be afraid of the superficial redundancy here. The `imdb:id` and `imdb:url` properties serve different purposes, and it's good to be able to restructure the website and update URLs without having to change the ids that other people might be referencing.
 
-## Handling ambiguity
+## handling ambiguity
 
 There will inevitably be situations where it's not clear whether some value should treated as a literal or a URI. And even in cases where a value is clearly some kind of identifier, there might be several plausible ways to represent it as a URI.
 

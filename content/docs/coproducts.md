@@ -1,4 +1,4 @@
-# Coproduct Types
+# coproduct types
 
 _Coproduct types_ are the other kind of composite types in tasl. They're also known as [_discriminated unions_](https://en.wikipedia.org/wiki/Tagged_union), _sums_, or _variants_.
 
