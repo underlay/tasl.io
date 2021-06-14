@@ -26,6 +26,7 @@ export default class extends Document<DocumentProps> {
 			<Html>
 				<Head>
 					<style dangerouslySetInnerHTML={{ __html: css }} />
+					<link rel="icon" href="/favicon.png" />
 					<link
 						rel="preload"
 						href="/Fonts/Athelas/904523/9d98c43c-eb88-46b7-ab0b-143e29ce5828.woff2"
