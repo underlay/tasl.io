@@ -13,5 +13,6 @@
 			{ "title": "style guide", "slug": "style-guide" }
 		]
 	},
+	{ "title": "specs", "slug": "specs" },
 	{ "title": "examples", "slug": "examples" }
 ]

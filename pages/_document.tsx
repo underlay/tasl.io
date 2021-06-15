@@ -48,11 +48,18 @@ export default class extends Document<DocumentProps> {
 						type="font/woff2"
 						crossOrigin="anonymous"
 					/>
-					<link
+					{/* <link
 						rel="preload"
 						href="/Fonts/FiraCode/FiraCode-Regular.woff2"
 						as="font"
 						type="font/woff2"
+						crossOrigin="anonymous"
+					/> */}
+					<link
+						rel="preload"
+						href="/Fonts/GoMono/GoMonoRegular.ttf"
+						as="font"
+						type="font/ttf"
 						crossOrigin="anonymous"
 					/>
 				</Head>

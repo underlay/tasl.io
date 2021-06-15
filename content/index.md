@@ -7,20 +7,23 @@ It builds on patterns from RDF, the semantic web, [algebraic data types](https:/
 ```tasl
 namespace ex http://example.com/
 
-class ex:IssueTicket :: {
+class ex:Person :: {
+  ex:name -> string
+  ex:favoriteBook -> ? * ex:Book
+}
+
+class ex:Book :: {
   ex:title -> string
-  ex:content -> string
-  ex:status -> [
-    ex:notStarted
-    ex:inProgress
-    ex:closed <- dateTime
-  ]
+  ex:isbn -> <>
 }
 ```
 
-tasl is a data model, a text schema language, and a binary format for serliazed _instances_ of schemas. An instance is better way to publish data than a CSV, JSON dump, or SQLite snapshot because
+tasl is a data model, a text schema language, and a binary format for serlialized _instances_ of schemas. tasl instances are a better way to publish data than CSVs, JSON dumps, or SQLite snapshots because
 
-- it's strongly typed
-- it's more compact
+- they're strongly typed
+- they're more compact
 - the data model is more expressive
-- it can easily be projected onto other data models
+- they can be easily projected onto other data models
+- properties and classes are named with URIs, which makes their meaning more explicit and easier to look up
+
+... and much more.

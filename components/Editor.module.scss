@@ -1,11 +1,13 @@
 .editor {
 	:global(.cm-scroller) {
-		font-family: "Fira Code", monospace;
+		// font-family: "Fira Code", monospace;
+		font-family: "Go Mono", monospace;
 	}
 
 	@supports (font-variation-settings: normal) {
 		:global(.cm-scroller) {
-			font-family: "Fira Code", monospace;
+			// font-family: "Fira Code", monospace;
+			font-family: "Go Mono", monospace;
 			font-size: 16px;
 		}
 	}
@@ -15,7 +17,8 @@
 	}
 
 	:global(.cm-tooltip) {
-		font-family: "Fira Code", monospace;
+		// font-family: "Fira Code", monospace;
+		font-family: "Go Mono", monospace;
 
 		font-family: "Courier New", Courier, monospace;
 		font-size: 14px;
@@ -23,7 +26,8 @@
 
 	:global(.cm-panel),
 	:global(.cm-tooltip) {
-		font-family: "Fira Code", monospace;
+		// font-family: "Fira Code", monospace;
+		font-family: "Go Mono", monospace;
 		font-size: 14px;
 	}
 
