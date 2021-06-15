@@ -35,7 +35,7 @@ const ContentFrame: React.FC<ContentFrameProps> = (props) => {
 				))}
 				<Section path="" page={{ title: "playground", slug: "playground" }} />
 			</TabNavigation>
-			<Pane paddingX={majorScale(4)} flex={1}>
+			<Pane paddingX={majorScale(4)} flex={1} overflow="auto">
 				{props.children}
 			</Pane>
 		</Pane>

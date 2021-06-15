@@ -27,7 +27,7 @@ edge                 = "=>"
 type = identifier    ; type variable
      / optional      ; optional type
      / reference     ; reference type
-     / uri           ; urifdas type
+     / uri           ; uri type
      / literal       ; literal type
      / product       ; product type
      / coproduct     ; coproduct type

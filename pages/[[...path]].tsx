@@ -98,8 +98,10 @@ const components: Components = {
 		inline ? (
 			<Code>{children}</Code>
 		) : (
-			<Pane background="tint2" border padding={majorScale(1)}>
-				{children}
+			<Pane border background="tint2" overflowX="auto">
+				<Pane width="max-content" padding={majorScale(1)}>
+					{children}
+				</Pane>
 			</Pane>
 		),
 	em: ({ children }) => <em>{children}</em>,
