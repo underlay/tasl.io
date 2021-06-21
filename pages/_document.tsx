@@ -32,21 +32,21 @@ export default class extends Document<DocumentProps> {
 						href="/Fonts/Athelas/904523/9d98c43c-eb88-46b7-ab0b-143e29ce5828.woff2"
 						as="font"
 						type="font/woff2"
-						crossOrigin="anonymous"
+						crossOrigin=""
 					/>
 					<link
 						rel="preload"
 						href="/Fonts/Athelas/904526/079434e7-2c5f-49b2-b9c3-108e30c54b35.woff2"
 						as="font"
 						type="font/woff2"
-						crossOrigin="anonymous"
+						crossOrigin=""
 					/>
 					<link
 						rel="preload"
 						href="/Fonts/Athelas/904532/dff56a2b-9f6c-41c3-9b8d-49415b53abd8.woff2"
 						as="font"
 						type="font/woff2"
-						crossOrigin="anonymous"
+						crossOrigin=""
 					/>
 					{/* <link
 						rel="preload"
@@ -60,7 +60,7 @@ export default class extends Document<DocumentProps> {
 						href="/Fonts/GoMono/GoMonoRegular.ttf"
 						as="font"
 						type="font/ttf"
-						crossOrigin="anonymous"
+						crossOrigin=""
 					/>
 				</Head>
 				<body>
