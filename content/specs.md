@@ -8,6 +8,7 @@ tasl = *( block newline ) block
 block = *WSP [ line-comment / statement *WSP ]
 
 statement = namespace-definition
+          / literal-definition
           / type-definition
           / class-declaration
           / edge-declaration
@@ -18,6 +19,7 @@ keyword-class     = %x63.6C.61.73.73
 keyword-edge      = %x65.64.67.65
 
 namespace-definition = keyword-namespace 1*WSP identifier 1*WSP namespace-uri
+literal-definition   = keyword-literal 1*WSP identifier 1*WSP term
 type-definition      = keyword-type 1*WSP identifier 1*WSP type
 class-declaration    = keyword-class 1*WSP term 1*WSP "::" 1*WSP type
 edge-declaration     = keyword-edge 1*WSP term 1*WSP "::" 1*WSP term 1*WSP edge 1*WSP term
@@ -28,13 +30,11 @@ type = identifier    ; type variable
      / optional      ; optional type
      / reference     ; reference type
      / uri           ; uri type
-     / literal       ; literal type
      / product       ; product type
      / coproduct     ; coproduct type
 
 optional   = "?" *WSP type
 uri        = "<>"
-literal    = term
 reference  = "*" *WSP term
 product    = "{" [ *WSP newline components ] *WSP "}"
 components = *( *WSP [ line-comment / component *WSP ] newline )
