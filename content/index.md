@@ -30,6 +30,6 @@ class s:Book :: {
 }
 ```
 
-tasl also has a binary format for serialized _instances_ of schemas. Together, you can use tasl to model and publish data in the same way you might use CSVs, JSON, or SQLite snapshots, although tasl is designed to make this entire process more structured and reusable.
+tasl also has a binary format for serialized _instances_ of schemas. Together, you can use tasl to model and publish data in the same way you might use CSVs, JSON, or SQLite snapshots, although **tasl is designed to make this entire process more structured and reusable**.
 
 tasl is part of the [Underlay](https://underlay.org/), a project to create a distributed public knowledge graph. Development is supported by [Protocol Labs Research](https://research.protocol.ai/) and the [Knowledge Futures Group](https://knowledgefutures.org/).
