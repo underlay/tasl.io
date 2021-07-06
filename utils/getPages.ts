@@ -1,17 +1,17 @@
 import { readFileSync } from "fs"
 import { resolve } from "path"
 
-import { Page } from "./page"
+import { SectionPage } from "./page"
 
-export function getPages(): Page[] {
+export function getPages(): SectionPage[] {
 	return JSON.parse(readFileSync(resolve("pages.json"), "utf-8"))
 }
 
 export function* getPaths(
 	path: string[],
-	pages: Page[]
+	sections: SectionPage[]
 ): Generator<{ params: { path: string[] } }, void> {
-	for (const { slug, children } of pages) {
+	for (const { slug, children } of sections) {
 		yield { params: { path: [...path, slug] } }
 		if (children !== undefined) {
 			yield* getPaths([...path, slug], children)

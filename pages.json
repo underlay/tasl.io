@@ -4,15 +4,27 @@
 		"slug": "docs",
 		"children": [
 			{ "title": "namespaces", "slug": "namespaces" },
+			{ "title": "schemas", "slug": "schemas" },
+			{ "title": "instances", "slug": "instances" },
 			{ "title": "literals", "slug": "literals" },
 			{ "title": "URIs", "slug": "uris" },
 			{ "title": "products", "slug": "products" },
 			{ "title": "units", "slug": "units" },
 			{ "title": "coproducts", "slug": "coproducts" },
 			{ "title": "references", "slug": "references" },
-			{ "title": "style guide", "slug": "style-guide" }
+			{ "title": "style guide", "slug": "style-guide" },
+			{ "title": "glossary", "slug": "glossary" }
 		]
 	},
-	{ "title": "specs", "slug": "specs" },
+	{
+		"title": "specs",
+		"slug": "specs",
+		"children": [
+			{ "title": "schema language", "slug": "schema-language" },
+			{ "title": "instance format", "slug": "instance-format" }
+		]
+	},
+	{ "title": "FAQ", "slug": "faq" },
+
 	{ "title": "examples", "slug": "examples" }
 ]

@@ -16,15 +16,15 @@
 		format("woff2");
 }
 
-/* @font-face {
+@font-face {
 	font-family: "Fira Code";
 	src: url("/Fonts/FiraCode/FiraCode-Regular.woff2") format("woff2");
-} */
-
-@font-face {
-	font-family: "Go Mono";
-	src: url("/Fonts/GoMono/GoMonoRegular.ttf") format("ttf");
 }
+
+/* @font-face {
+	font-family: "Go Mono";
+	src: url("/Fonts/GoMono/GoMonoRegular.ttf") format("truetype");
+} */
 
 html {
 	background-color: seashell;
@@ -42,9 +42,9 @@ blockquote {
 	margin: 8px;
 }
 
-pre {
-	/* font-family: "Fira Code", monospace; */
-	font-family: "Go Mono", monospace;
+code {
+	/* font-family: "Go Mono", monospace; */
+	font-family: "Fira Code", monospace;
 	font-size: 14px;
 }
 
@@ -58,4 +58,9 @@ em {
 	font-weight: normal;
 	font-style: normal;
 	font-family: "Athelas W01 Italic";
+}
+
+img {
+	max-width: 100%;
+	margin: 1em;
 }

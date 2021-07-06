@@ -60,7 +60,7 @@ class ex:Person :: {
 }
 ```
 
-... a person has to have exactly one name. We've seen how we coud model a person with an optional name...
+... a person has to have exactly one name. We've seen how we could model a person with an optional name...
 
 ```tasl
 namespace ex http://example.com/

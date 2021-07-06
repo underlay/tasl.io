@@ -9,6 +9,7 @@ import ContentFrame from "components/ContentFrame"
 import { initialValue } from "utils/initialValue"
 import { PageProps } from "utils/page"
 import { getPages } from "utils/getPages"
+// import Example from "components/Example"
 
 export const getStaticProps: GetStaticProps<PlaygroundProps, PlaygroundParams> =
 	async ({}) => ({ props: { pages: getPages() } })
@@ -21,6 +22,7 @@ const Playground: React.FC<PlaygroundProps> = (props) => {
 	return (
 		<ContentFrame pages={props.pages}>
 			<Pane marginY={majorScale(1)}>
+				{/* <Example input={initialValue} /> */}
 				<Editor initialValue={initialValue} onChange={handleChange} />
 			</Pane>
 		</ContentFrame>

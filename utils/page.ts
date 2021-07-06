@@ -1,9 +1,12 @@
-export interface Page {
+export interface ContentPage {
 	title: string
 	slug: string
-	children?: Page[]
+}
+
+export interface SectionPage extends ContentPage {
+	children?: ContentPage[]
 }
 
 export interface PageProps {
-	pages: Page[]
+	pages: SectionPage[]
 }

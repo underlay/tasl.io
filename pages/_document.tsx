@@ -27,7 +27,7 @@ export default class extends Document<DocumentProps> {
 				<Head>
 					<style dangerouslySetInnerHTML={{ __html: css }} />
 					<link rel="icon" href="/favicon.png" />
-					<link
+					{/* <link
 						rel="preload"
 						href="/Fonts/Athelas/904523/9d98c43c-eb88-46b7-ab0b-143e29ce5828.woff2"
 						as="font"
@@ -47,7 +47,7 @@ export default class extends Document<DocumentProps> {
 						as="font"
 						type="font/woff2"
 						crossOrigin=""
-					/>
+					/> */}
 					{/* <link
 						rel="preload"
 						href="/Fonts/FiraCode/FiraCode-Regular.woff2"
@@ -55,13 +55,13 @@ export default class extends Document<DocumentProps> {
 						type="font/woff2"
 						crossOrigin="anonymous"
 					/> */}
-					<link
+					{/* <link
 						rel="preload"
 						href="/Fonts/GoMono/GoMonoRegular.ttf"
 						as="font"
 						type="font/ttf"
 						crossOrigin=""
-					/>
+					/> */}
 				</Head>
 				<body>
 					<Main />
