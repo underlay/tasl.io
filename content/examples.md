@@ -33,3 +33,38 @@ class ex:Statement :: {
   ]
 }
 ```
+
+## tasl schemas
+
+```
+namespace ul http://underlay.org/ns/
+
+type value [
+  ul:reference <- * ul:class
+  ul:uri <- {}
+  ul:literal <- <>
+  ul:product <- * ul:product
+  ul:coproduct <- * ul:coproduct
+]
+
+class ul:class :: {
+  ul:key -> <>
+  ul:value -> value
+}
+
+class ul:product :: {}
+
+class ul:component :: {
+  ul:key -> <>
+  ul:source -> * ul:product
+  ul:value -> value
+}
+
+class ul:coproduct :: {}
+
+class ul:option :: {
+  ul:key -> <>
+  ul:source -> * ul:coproduct
+  ul:value -> value
+}
+```
