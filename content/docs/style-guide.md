@@ -9,3 +9,4 @@
 5. Minimize `xsd:boolean` - use enums whenever you can
 6. Use `JSON` when you need to, but only when you really need to
 7. Minimize linked lists
+8. Know when to reify

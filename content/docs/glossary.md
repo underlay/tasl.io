@@ -32,7 +32,7 @@ A _schema_ is a set of classes.
 
 ### **schema language**
 
-### binary format
+### **binary format**
 
 ### **class**
 
