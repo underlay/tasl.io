@@ -1,8 +1,8 @@
 # example schemas
 
-(under construction)
+## RDF (n-quads)
 
-## RDF
+An instance of this schema is equivalent to an RDF _dataset_.
 
 ```tasl
 namespace ex http://example.com/
@@ -34,11 +34,15 @@ class ex:Statement :: {
 }
 ```
 
+We could have simplifing the schema to just model RDF _graphs_ by removing the `ex:graph` component of the statement class.
+
 ## tasl schemas
 
+We can also model tasl schemas themselves as instances of a _schema schema_.
+
 ```
-# tasl schemas are modelled using terms from
-# the standard underlay namespace
+# tasl schemas are canonically modelled using terms from
+# the underlay namespace
 namespace ul http://underlay.org/ns/
 
 # there are five kinds of tasl types:
@@ -67,6 +71,8 @@ class ul:product :: {}
 
 # ... and components as their own class, each element
 # of which is "attached" to a source product element.
+# This way, each individual ul:product element can "have"
+# arbitrarily many components.
 class ul:component :: {
   ul:source -> * ul:product
   ul:key -> <>
@@ -87,12 +93,21 @@ class ul:class :: {
   ul:key -> <>
   ul:value -> value
 }
-
-# if we wanted this schema to model a set of many schemas,
-# then we would make an addional unit class ul:schema ...
-# class ul:schema :: {}
-# ... and modify the ul:class class to reference a source
-# ul:schema element. but by not doing this, we essentially
-# make a schema that models a single schema - just a set
-# of classes.
 ```
+
+An instance of this schema is equivalent to one individual tasl schema. That's why there's no "`ul:schema'" class - an entire instance is an entire schema. If we wanted, we could add a "schema class"...
+
+```
+class ul:schema :: {}
+```
+
+... and modify classes to "belong" to a particular schema...
+
+```
+class ul:class :: {
+  ul:source -> * ul:schema
+  # ...
+}
+```
+
+... which would give us a schema whose instances are collections of many schemas.
