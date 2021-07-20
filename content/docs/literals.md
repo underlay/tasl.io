@@ -16,18 +16,16 @@ Literal types are special in tasl in that they don't have an inline syntax - the
 namespace ex http://example.com/
 namespace xsd http://www.w3.org/2001/XMLSchema#
 
-literal string xsd:string
-literal integer xsd:integer
 literal myCustomLiteralName ex:hello/world
+literal xsd_integer xsd:integer
 
-class ex:Person :: {
-  ex:name -> string
-  ex:age -> integer
+class ex:Thing :: {
   ex:foo -> myCustomLiteralName
+  ex:bar -> xsd_integer
 }
 ```
 
-Here, `string`, `integer`, and `myCustomLiteralName` are all local type variables. Once we define them, we can use the bare identifiers (`string`, etc.) as type expressions later in the schema.
+Here, we use the `literal` keyword statment to define local variables `myCustomLiteralName` and `xsd_integer` as literal types with datatypes `http://example.com/hello/world` and `http://www.w3.org/2001/XMLSchema#integer`. Once we define them, we can use the bare identifiers `myCustomLiteralName` and `xsd_integer` as type expressions later in the schema.
 
 ## where do datatypes come from?
 
@@ -39,7 +37,7 @@ From tasl's perspective, any _value_ of any literal type (regardless of its data
 
 What datatypes _are_ for is interfacing with the outside world. Just like class URIs, datatypes are a social contract. In this case, there was a specification published in 2004 by the W3C that defined a big collection of datatypes under the `http://www.w3.org/2001/XMLSchema#` namespace, with very precise specs for their lexical forms (ie how to represent them all as strings). By using the datatype `xsd:integer`, we're promising that all of the values of that type will follow the specification on [this webpage](https://www.w3.org/TR/xmlschema-2/#integer) (`"42"`, `"0"`, `"-5"`, ...). This lets other people make tools that interface with instances on that assumption: for example, someone could make a tool for importing an instance into a relational database that maps every literal with datatype `xsd:integer` to a native `INTEGER NOT NULL` column, parsing an integer out of each string value based on the XSD spec. For datatypes that it doesn't recognize, it can always fall back to treating them as Unicode strings, since that's the baseline representation for all literal values.
 
-Datatypes are another example of using URIs for coordination.
+Datatypes are another example of using URIs for decentralized coordination.
 
 ## global variables for XSD datatypes
 
@@ -86,6 +84,10 @@ literal dateTimeStamp      xsd:dateTimeStamp
 literal hexBinary          xsd:hexBinary
 literal base64Binary       xsd:base64Binary
 ```
+
+![A digram of the primitive XSD datatypes and their derivations](/images/type-hierarchy-201104.svg)
+
+The XSD spec defines some of these as "derivations" of others, but tasl doesn't know or care about that part. To tasl, these are all just opaque URIs.
 
 You don't have to remember to include the XSD namespace in every schema, and you generally don't even have to remember the `literal` statement syntax. You can just use the global variables as type expressions:
 
