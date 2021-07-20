@@ -45,7 +45,17 @@ Datatypes are another example of using URIs for coordination.
 
 This sounds like a lot of complexity, especially just for primitives! What if we just want a regular type like `boolean` - do we always have to come up with a URI and declare it with a `literal` statement?
 
-Fortunately not; tasl has some affordances to make common cases easy. The [XSD namespace](https://www.w3.org/TR/xmlschema11-2/) (`http://www.w3.org/2001/XMLSchema#`) is the (somewhat) canonical default namespace for literals in RDF, and it includes definitions for all the basic common datatypes like strings, booleans, and various sizes of numbers. In tasl, all of the datatypes from the XSD namespace are defined as _global variables_, meaning you can just use them as bare identifiers without declaring them (and without declaring the XSD namespace itself).
+Fortunately not; tasl has some affordances to make common cases easy. The [XSD namespace](https://www.w3.org/TR/xmlschema11-2/) (`http://www.w3.org/2001/XMLSchema#`) is the (somewhat) canonical default namespace for literals in RDF, and it includes definitions for all the basic common datatypes like strings, booleans, and various sizes of numbers. In tasl, some of the datatypes from the XSD namespace are defined as _global variables_, meaning you can just use them as bare identifiers without declaring them (and without declaring the XSD namespace itself). These datatypes are
+
+- http://www.w3.org/2001/XMLSchema#string
+- http://www.w3.org/2001/XMLSchema#boolean
+- http://www.w3.org/2001/XMLSchema#double
+- http://www.w3.org/2001/XMLSchema#float
+- http://www.w3.org/2001/XMLSchema#decimal, and all atomic types derived from it
+- http://www.w3.org/2001/XMLSchema#date
+- http://www.w3.org/2001/XMLSchema#dateTime, and all atomic types derived from it
+- http://www.w3.org/2001/XMLSchema#hexBinary
+- http://www.w3.org/2001/XMLSchema#base64Binary
 
 This means that you can pretend that every schema starts with these global definitions:
 
@@ -56,8 +66,10 @@ literal string             xsd:string
 literal boolean            xsd:boolean
 literal double             xsd:double              # float64
 literal float              xsd:float               # float32
+literal decimal            xsd:decimal
 literal integer            xsd:integer
 literal nonNegativeInteger xsd:nonNegativeInteger
+literal positiveInteger    xsd:positiveInteger
 literal long               xsd:long                # int64
 literal int                xsd:int                 # int32
 literal short              xsd:short               # int16
@@ -66,10 +78,13 @@ literal unsignedLong       xsd:unsignedLong        # uint64
 literal unsignedInt        xsd:unsignedInt         # uint32
 literal unsignedShort      xsd:unsignedShort       # uint16
 literal unsignedByte       xsd:unsignedByte        # uint8
-literal hexBinary          xsd:hexBinary
-literal base64Binary       xsd:base64Binary
+literal nonPositiveInteger xsd:nonPositiveInteger
+literal negativeInteger    xsd:negativeInteger
 literal date               xsd:date
 literal dateTime           xsd:dateTime
+literal dateTimeStamp      xsd:dateTimeStamp
+literal hexBinary          xsd:hexBinary
+literal base64Binary       xsd:base64Binary
 ```
 
 You don't have to remember to include the XSD namespace in every schema, and you generally don't even have to remember the `literal` statement syntax. You can just use the global variables as type expressions:
@@ -83,7 +98,7 @@ class ex:Person :: {
 }
 ```
 
-As a general rule, try use the most specific XSD datatype available. If you _know_ that all of your ages will be zero or positive, you should feel free to say so:
+As a general rule, try use the most specific XSD datatype available. If you _know_ that all of your ages will be greater than or equal to zero, you should feel free to say so:
 
 ```tasl
 namespace ex http://example.com/
