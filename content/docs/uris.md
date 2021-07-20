@@ -141,6 +141,8 @@ Good URLs:
 
 If the URL has a page title in it, it's probably **not** a good URI value. It's only a good URI value if it feels like an _identifier_.
 
+For more information, see [_Cool URIs don't change_](https://www.w3.org/Provider/Style/URI.html).
+
 ## what about actual URLs?
 
 So if URLs in the "this links to a webpage" sense make bad URIs, how _should_ we model webpage links? This is obviously an extremely common kind of value!
