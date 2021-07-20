@@ -85,9 +85,7 @@ literal hexBinary          xsd:hexBinary
 literal base64Binary       xsd:base64Binary
 ```
 
-The XSD spec defines some of these as "derivations" of others, but tasl doesn't know or care about that part. To tasl, these are all just opaque URIs.
-
-![A digram of the primitive XSD datatypes and their derivations](/images/type-hierarchy-201104.svg)
+The XSD spec defines some of these as "derivations" of others, which you can see in [this diagram](https://www.w3.org/TR/xmlschema11-2/#built-in-datatypes), but tasl doesn't know or care about that part. To tasl, these are all just opaque URIs.
 
 You don't have to remember to include the XSD namespace in every schema, and you generally don't even have to remember the `literal` statement syntax. You can just use the global variables as type expressions:
 
