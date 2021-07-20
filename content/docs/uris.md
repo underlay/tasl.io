@@ -13,7 +13,7 @@ class ex:Book :: {
 }
 ```
 
-Alternatively, you might find `uri` more readable:
+Alternatively, you might find the global variable `uri` more readable:
 
 ```tasl
 namespace ex http://example.com/
@@ -24,7 +24,7 @@ class ex:Book :: {
 }
 ```
 
-Just like `string` and `integer`, `uri` is defined to be global variable in tasl:
+Just like `string` and `integer`, `uri` is defined globally for all tasl schemas:
 
 ```tasl
 type uri <>
