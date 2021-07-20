@@ -45,13 +45,9 @@ Datatypes are another example of using URIs for coordination.
 
 This sounds like a lot of complexity, especially just for primitives! What if we just want a regular type like `boolean` - do we always have to come up with a URI and declare it with a `literal` statement?
 
-Fortunately not; tasl has some affordances to make common cases easy. In tasl, all of the datatypes from the [XSD namespace](https://www.w3.org/TR/xmlschema11-2/) (`http://www.w3.org/2001/XMLSchema#`) are defined as _global variables_, meaning you can just use them as bare identifiers without declaring them (and without declaring the XSD namespace itself).
+Fortunately not; tasl has some affordances to make common cases easy. The [XSD namespace](https://www.w3.org/TR/xmlschema11-2/) (`http://www.w3.org/2001/XMLSchema#`) is the (somewhat) canonical default namespace for literals in RDF, and it includes definitions for all the basic common datatypes like strings, booleans, and various sizes of numbers. In tasl, all of the datatypes from the XSD namespace are defined as _global variables_, meaning you can just use them as bare identifiers without declaring them (and without declaring the XSD namespace itself).
 
-The XSD namespace is the (somewhat) canonical default namespace for literals in RDF, and it includes essentially
-
-fortunately we don't usually need to think about it. The [XML Schema Definition Language](https://www.w3.org/TR/xmlschema11-2/) namespace (`http://www.w3.org/2001/XMLSchema#`) has become the go-to namespace for datatypes in RDF, and we recommend defaulting to it for general-purpose use in tasl as well.
-
-To make this easier, the following types are declared as _global variables_ in tasl:
+This means that you can pretend that every schema starts with these global definitions:
 
 ```tasl
 namespace xsd http://www.w3.org/2001/XMLSchema#
@@ -76,7 +72,7 @@ literal date               xsd:date
 literal dateTime           xsd:dateTime
 ```
 
-This means you don't have to remember to include the XSD namespace in every schema, and you generally don't even have to remember the `literal` statement syntax. You can just use the global variables as type expressions...
+You don't have to remember to include the XSD namespace in every schema, and you generally don't even have to remember the `literal` statement syntax. You can just use the global variables as type expressions:
 
 ```tasl
 namespace ex http://example.com/
@@ -87,12 +83,9 @@ class ex:Person :: {
 }
 ```
 
-... but remember that `string` and `integer` are _variable names_, not keywords.
-
 As a general rule, try use the most specific XSD datatype available. If you _know_ that all of your ages will be zero or positive, you should feel free to say so:
 
 ```tasl
-namespace xsd http://www.w3.org/2001/XMLSchema#
 namespace ex http://example.com/
 
 class ex:Person {
