@@ -23,3 +23,28 @@ class s:Person :: {
 The curly braces aren't part of the class declaration (like they would be in JavaScript, for example) - the grammar for declaring a class is just "class _uri_ _type_". The curly braces define an inline product object with two components. The first component has key `ex:favoriteColor` and value `<xsd:string>`; the second component has key `ex:birthday` and value `<xsd:dateTime>`.
 
 The value of a product type has a value for every one of its components.
+
+## unit types
+
+An important special case of product types is the empty product type, also called the _unit type_. For convenience, tasl has a global variable `unit` defined to be the unit type:
+
+```tasl
+type unit {}
+```
+
+In some ways, the unit type resembles a "null" type; in other contexts it can be used to indicate "nodes" or a raw concept of "identity". For example, here's a schema for [directed graphs](https://en.wikipedia.org/wiki/Directed_graph):
+
+```tasl
+namespace ex http://example.com/
+
+class ex:Node :: {}
+
+class ex:Edge :: {
+  ex:source -> * ex:Node
+  ex:target -> * ex:Node
+}
+```
+
+Here, an instance of the schema can have many distinct _elements_ for the class `ex:Node`. But each of these elements will have the same empty unit value. What this really means is that our schema describes an _unlabelled_ directed graph: one where nodes don't have externally-accessible identity.
+
+Unit are especially powerful when combined with coproduct types, so we'll see more examples of them in action over there.
