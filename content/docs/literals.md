@@ -121,7 +121,7 @@ The literals in global namespace should cover most use cases, but sometimes you'
 
 You should only try to do this for things that meet **all** of the following conditions:
 
-1. representable as a UTF-8 string
+1. representable as a Unicode string
 2. not very large (ie you wouldn't think of it as a _file_)
 3. has _internal structure_ that can be described with a formal grammar
 4. would be awkward to represent as a composite type in tasl
