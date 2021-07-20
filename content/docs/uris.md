@@ -96,7 +96,7 @@ The most generally useful URN namespace is [`uuid`](https://tools.ietf.org/html/
 urn:uuid:3cf5a9a7-f6e5-4e83-ba0a-af88dc8360ab
 ```
 
-Adding UUID ids is one of the easiest ways to give your class entities permanent external identity. We'll talk about this again later.
+Adding UUID ids is one of the easiest ways to give your class entities permanent external identity.
 
 ## URLs
 
@@ -128,7 +128,7 @@ class imdb:Actor :: {
 
 In this case, the URI values are very similar to what you'd see in your browser when you view a movie or actor on their website - but not exactly the same.
 
-Please note that you should **not** invent URI formats for domains that you don't have authority over. Only IMDB has the authority to
+Please note that you should **not** invent URI formats for domains that you don't have authority over. Only IMDB has the authority to say what format to use for its URLs.
 
 Good URLs:
 
@@ -139,7 +139,7 @@ Good URLs:
 - are generally not human-readable
 - are relatively permanent
 
-If the URL has a page title, name, or is just a path like `http://example.com/folder1/folder2/file`, it's probably not a good URI value.
+If the URL has a page title in it, it's probably **not** a good URI value. It's only a good URI value if it feels like an _identifier_.
 
 ## what about actual URLs?
 
