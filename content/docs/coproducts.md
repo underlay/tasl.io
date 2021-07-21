@@ -4,9 +4,9 @@ _Coproduct types_ are the other kind of composite types in tasl. They're also kn
 
 > Coproducts correspond to the idea of "OR" or _alternatives_.
 
-Similar to product types, coproduct types map URI keys to types, but they're written using square brackets `[]` and left arrows `<-`. We call the slots of a coproduct type its _options_. The two parts of each option are its _key_ (the URI) and its _value_ (the type).
+Similar to product types, coproduct types map URI keys to types, but they're written using square brackets `[]` and left arrows `<-`. We call the entries of a coproduct type _options_. The two parts of each option are the _key_ (the URI) and the _value_ (the type).
 
-Just like products, the options of a coproduct have to be on their own line.
+Just like products, each option of a coproduct has to be on its own line.
 
 Use coproducts when you need to model a value that can be one of several different conceptual options:
 
@@ -51,13 +51,13 @@ class ex:BookStore :: {
 
 ```
 
-A value of a coproduct type has a value for exactly **one** of its options, _and it also knows explicitly which option it is_. This is different than regular _union types_, which are more common in programming langauges. For example, in TypeScript, this type:
+A value of a coproduct type has a value for exactly **one** of its options, and it also knows explicitly which option it is. This is different than regular _union types_, which are more common in programming langauges. For example, in TypeScript, this type...
 
-```
+```typescript
 type hello = string | string
 ```
 
-... behaves exactly like the regular type `string` - a value of type `hello` will be a string like `"world"`. But in tasl, if we have a coproduct
+... behaves exactly like the regular type `string` - a value of type `hello` will be a string like `"world"`. But in tasl, if we have a coproduct...
 
 ```tasl
 namespace ex http://example.com/
@@ -68,9 +68,9 @@ type hello [
 ]
 ```
 
-a value of type `hello` will be a string tagged with an option key: something like `(ex:a, "world")` or `(ex:b, "world")`. This is why coproduct are also called _tagged unions_.
+... a value of type `hello` will be a string _tagged with an explicit option key_: something like `(ex:a, "world")` or `(ex:b, "world")`. This is why coproduct are also called _tagged unions_.
 
-## Enums
+## enums
 
 One really powerful way to use coproducts is to make a "coproduct of units":
 
@@ -147,7 +147,7 @@ class ex:IssueTicket :: {
 }
 ```
 
-You should use enums as much as possible. They're appropriate for anything that has a discrete, finite number of possible states or statuses. In most cases you'll find that enums can replace boolean literals, and you should prefer enums whenever there are natural names for the two possible states. For example, this schema:
+You should use enums as much as possible! They're appropriate for anything that has a discrete, finite number of possible states or statuses. In most cases you'll find that enums can replace boolean literals, and you should prefer enums whenever there are natural names for the two possible states. For example, this schema:
 
 ```tasl
 namespace ex http://example.com/
@@ -174,14 +174,14 @@ class ex:Person :: {
 
 This makes schemas easier to migrate and easier to read (for example, we avoid having to parse a double-negative `isDeceased: false`). But if there aren't natural, descriptive names for the two states that a boolean represents, just stick with a literal type.
 
-## Optional values
+## optional values
 
 We can use the coproduct + unit pattern to model _optional properties_. Here we have a schema that models people, each of whom may or may not have a favorite book:
 
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person {
+class ex:Person :: {
   ex:name -> string
   ex:favoriteBook -> [
     ex:doesNotHaveAFavoriteBook <- {}
@@ -204,7 +204,7 @@ This kind of structure - a coproduct of a unit and something else - is so common
 ]
 ```
 
-This is really convenient because it means we don't have to worry about naming the two options `ex:doesNotHaveAFavoriteBook` and `ex:hasAFavoriteBook`, we can just write:
+This is really convenient because it means we don't have to worry about coming up with names for the two options `ex:doesNotHaveAFavoriteBook` and `ex:hasAFavoriteBook`; we can just write:
 
 ```tasl
 namespace ex http://example.com/

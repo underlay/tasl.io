@@ -8,11 +8,13 @@ A tasl _schema_ defines a set of _classes_. Each class has _key_ and a _type_. A
 - a [coproduct type](/docs/coproducts)
 - a [reference type](/docs/references)
 
-Two of these - products and coproducts - are composite, meaning they're composed of other types. Literals, URIs, and references are all primitive types
+Two of these - products and coproducts - are composite, meaning they're composed of other types. Literals, URIs, and references are all primitive types.
 
 ![a digram of a schema including two classes, a composite type, and a reference type](/images/schema.png)
 
-In tasl, we declare classes using the `class` keyword, followed by its key and a type expression. Here, we declare a class with a key `ex:Thing` and a type `{}`.
+You can think of a schema as a forest of trees - each root is a class, and is attached to a tree of nested composite types all ending in leaf primitive types. References are a little special, since they point to other classes in the same schema (ie leaves that point to other roots).
+
+In tasl, we declare classes using the `class` keyword. Here's a schema with one class with a key `ex:Thing` and a type `{}`.
 
 ```tasl
 namespace ex http://example.com/
@@ -34,3 +36,5 @@ class ex:Person :: {
   ]
 }
 ```
+
+The `::` token always indicates a class declaration. In the future, tasl may introduce other keyword statements that let us declare common kinds of classes using compact, specialized syntax, but these will always follow the `[keyword] [class key] :: (...)` pattern.

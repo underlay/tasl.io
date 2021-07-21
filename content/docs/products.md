@@ -4,7 +4,7 @@ _Product types_ are one of the two composite types in tasl - that means they're 
 
 > Product types correspond to the idea of "AND" or _combination_.
 
-A product type is written as map from URI keys to types, using curly braces `{}`, arrows `->`, and semicolons. We call the slots of a product type its _components_, and the two parts of each component are its _key_ (the URI) and its _value_ (the type). Each component of a product type has to be on its own line.
+A product type is written as map from URI keys to types, using curly braces `{}` and right arrows `->`. We call the entries in a product type _components_, and the two parts of each component are the _key_ (the URI) and the _value_ (the type). Each component of a product type has to be on its own line.
 
 It's sometimes confusing to use the word "value" to refer to the type that a component maps to, but usually there's enough context to tell whether "value" means a type-in-a-component or an actual concrete instance-of-a-type value.
 
@@ -20,7 +20,7 @@ class s:Person :: {
 }
 ```
 
-The curly braces aren't part of the class declaration (like they would be in JavaScript, for example) - the grammar for declaring a class is just "class _uri_ _type_". The curly braces define an inline product object with two components. The first component has key `ex:favoriteColor` and value `<xsd:string>`; the second component has key `ex:birthday` and value `<xsd:dateTime>`.
+The curly braces aren't part of the class declaration (like they would be in JavaScript, for example) - the grammar for declaring a class is just "class _uri_ :: _type_". The curly braces define an inline product object with two components. The first component has key `ex:favoriteColor` and value `string`; the second component has key `ex:birthday` and value `dateTime`.
 
 The value of a product type has a value for every one of its components.
 

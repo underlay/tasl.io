@@ -18,20 +18,24 @@ class ex:Book :: {
 
 Here, `* ex:Book` is a reference type; we would pronounce it "a reference to `ex:Book`".
 
-A value of a reference type is an element of the referenced class. Sometimes we'll call this value a _pointer_. Recall this relationship diagram:
+A value of a reference type is an element of the referenced class. Sometimes we'll call this value a _pointer_. Recall this diagram of a schema...
 
-![An overview of the relationships between schemas, instances, classes, types, elements, and values](/collection-diagram.svg)
+![](/images/schema.png)
 
-References account for the two "might reference" arrows. A type might be a reference type that points to another class in the same schema, in which case its values are all pointers to individual elements (of the corresponding class) in the same instance.
+... and this diagram of an instance:
 
-## Managing identity
+![](/images/instance.png)
 
-Often you'll be faced with a choice between inlining a type and splitting it out into its own class. Let's compare the previous example to this similar schema...
+When we have a reference type that points to a given class in the same schema, its values are all pointers to specific elements (of the corresponding class) in the same instance.
+
+## managing identity
+
+Often you'll be faced with a choice between inlining a type and splitting it out into its own class. Let's compare the first example to this similar schema, where we just spliced the book type directly into the person class:
 
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person :: {
+class ex:Person2 :: {
   ex:name -> string
   ex:favoriteBook -> ? {
     ex:title -> string
@@ -40,14 +44,14 @@ class ex:Person :: {
 }
 ```
 
-... where we just spliced the book type directly into the person class. There are two major functional differences between the two schemas:
+There are two major functional differences between the two schemas:
 
-1. In the first schema (with separate classes), it's possible to have lots of books that aren't anybody's favorite. In the second example, the only way that a book can show up in an instance is as a nested value of an `ex:Person` element.
+1. In the first schema (with separate classes), it's possible to have lots of books that aren't anybody's favorite. In the second example, the only way that a book can show up in an instance is as a nested value of an `ex:Person2` element.
 2. In the first schema, it's easy to tell if two people have the same favorite book, since we can just ask whether the references point to the same book element. In the second schema, the best we could do is compare the _values_ of the `ex:favoriteBook` components for different people. In this case, we're probably comfortable with comparing the values for `ex:title` and `ex:isbn`, and if they're the same for two people, concluding that they have the same favorite book. But in other cases this kind of value comparison can break down, or isn't appropriate for the actual thing you're modeling. Having separate classes allows us to have multiple elements with the exact same values.
 
 The common theme behind both of these differences is the motto that _identity is held by elements_. Comparing the values (or parts of the values) of different elements is only sometimes useful.
 
-## Multi-valued properties
+## multi-valued properties
 
 One common way that we use references is to model properties that can have multple values. For example, in this simple schema...
 
@@ -88,9 +92,9 @@ class ex:Person/name :: {
 
 In this schema, we can have arbitrarily many people elements, each of whom has exactly one integer age. Separately, we have arbitrarly many `ex:Person/name`, each of which points to a person element and also has a string name. Retriving the set of names that are associated with a given person just amounts to retriving the `ex:Person/name` elements that reference to that person.
 
-Writing separate classes for multi-properties like this is definitely a little awkward. It's good practice to give these "property classes" relatively verbose, obvious names like `ex:Person/name` to indicate that they're not proper conceptual objects. "Property class" is an informal term for classes that are used to link other classes with values.
+Writing separate classes for multi-properties like this is definitely a little awkward. It's good practice to give these "property classes" verbose, obvious names like `ex:Person/name` to indicate that they're not proper conceptual objects. "Property class" is an informal term for classes that are used to link other classes with values.
 
-## Unit references
+## unit references
 
 Another useful general pattern is to use references to unit classes as a way to "tie things together". We've already seen this with the example of a directed graph:
 
@@ -124,7 +128,7 @@ class ex:Hyperedge/includes :: {
 
 Multi-valued properties are also called _one-to-many_ properties; hypergraphs are an example of modeling a _many-to-many_ property. Each edge can have many nodes; each node can belong to many edges. But the important takeaway is that "supporting many-to-many properties" isn't built in to tasl. Instead, it's a structure that we were able to model ourselves using simple building blocks (units, products, and references).
 
-## Self-references
+## self-references
 
 Technically, you can even define a class to be a reference to itself:
 
@@ -149,7 +153,7 @@ class ex:ListOfIntegers :: ? {
 
 The class `ex:ListOfIntegers` is either nothing - the `ex:none` option of the `?` coproduct - or (in the `ex:some` option of the `?` coproduct) a product of two components: an `integer` and a pointer to another `ex:ListOfIntegers` element. This means that an element of `ex:ListOfIntegers` is either null (the empty list) or an integer and another element.
 
-As the name implies, this effectively models a [linked list](https://en.wikipedia.org/wiki/Linked_list) of integers. There's no generic "list" type in tasl; if we need lists we have to roll our own linked list class for the particular type that we want (although this is discouraged, which we'll talk about later).
+As the name implies, this effectively models a [linked list](https://en.wikipedia.org/wiki/Linked_list) of integers.
 
 If we wanted to model _non-empty_ linked lists, we could tweak our class declaration to express that:
 
@@ -164,4 +168,4 @@ class ex:ListOfIntegers :: {
 
 ... here we moved the optional operator from the top level to the `ex:tail` component. This means that now every element has to have an integer `ex:head` value, and can optionally link to another element.
 
-Again, the purpose of this example is just to illustrate how references work. Making linked lists with schemas is discouraged, and using this non-empty linked list structure to enforce a "one or more" constraint on an otherwise-unordered multi-valued property is even more strongly discouraged.
+The purpose of this example is just to illustrate how references work. Making linked lists is discouraged, which is covered further in the [style guide](/docs/style-guide).
