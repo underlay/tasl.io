@@ -1,6 +1,6 @@
 # documentation
 
-The documentation pages here are organized in a rough order, but aren't perfectly sorted - you have to jump around or read through them all several times.
+The documentation pages here are organized in a rough order, but aren't perfectly sorted - you may have to jump around or read through them all several times.
 
 1. [namespaces](/docs/namespaces)
 2. [schemas](/docs/schemas)
