@@ -2,15 +2,19 @@
 
 If you have a question about tasl that isn't covered here, or if you just want to say hi, feel free to start a thread in [the Underlay category on our discourse forum](https://discourse.knowledgefutures.org/c/underlay/6).
 
-## why tasl?
+## why does tasl exist?
 
-There are a few
-
-In the short term
+tasl's simplest value proposition is that it offers a lightweight, accessible way to model data using algebraic data types.
 
 In the medium term
 
 Finally, in the long term,
+
+we hope that tasl will be a good foundation for representing structured relationships between instances.
+
+Generalizing
+
+We ultimately expect that tasl's concept of _elements_ will be important for expressing these kind of correspondences.
 
 ## who is working on tasl?
 
@@ -26,10 +30,6 @@ Some discussion threads on tasl's early development can be found [here](https://
 
 Use "tasl" whenever you can, and "TASL" when you absolutely need to.
 
-## should I actually use tasl?
-
-Adopting new file formats should never be done lightly.
-
 ## will tasl change? how is it versioned?
 
 The schema language and binary codec are versioned separately. The schema language uses semantic versioning and its current version is `0.1.0`; the binary format is versioned with a single incrementing major version number. and its current version is `1`.
@@ -41,3 +41,7 @@ In math, an [_algebra_](https://en.wikipedia.org/wiki/Algebra_over_a_field) is a
 In the algebra that's taught in high school, the initial things are numbers and variables, and the two ways of combining them are addition and multiplication. In that context, an "algebraic expression" is something like `(x * 4) + (y * (x + 1))` - a composite thing built up from some initial terms and assembled using `*` and `+`.
 
 The algebra that tasl deals with is one where the expressions are _types_. Here, instead of numbers and variables, our initial terms are primitive types like `string` and `date`, and our two ways of combining them are called _product_ and _coproduct_. These are known as [algebraic data types](https://en.wikipedia.org/wiki/Algebraic_data_type).
+
+## why are URIs and literals different?
+
+This is also a distinction in RDF - Named Nodes are different than Literals. In tasl, we wanted a sharp distinction between values that are _identifiers_ and values that just represent themselves. The URI type is supposed to indicate that the values can be used to interface with other systems. In the binary format, they're serialized the same way, but other tools like tasl-native databases may want to index them differently.
