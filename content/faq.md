@@ -6,15 +6,7 @@ If you have a question about tasl that isn't covered here, or if you just want t
 
 tasl's simplest value proposition is that it offers a lightweight, accessible way to model data using algebraic data types.
 
-In the medium term
-
-Finally, in the long term,
-
-we hope that tasl will be a good foundation for representing structured relationships between instances.
-
-Generalizing
-
-We ultimately expect that tasl's concept of _elements_ will be important for expressing these kind of correspondences.
+In the longer term, we hope that tasl can provide a more structure foundation for representing data that can support kinds of uses that aren't possible today. In particular, we're interested in exploring ways to represent _partial correspondences_ between datasets in situations where the underlying ontologies do not perfectly align, but still relate in certain ways. We ultimately expect that tasl's explicit concept of _elements_ will be important for expressing these kind of correspondences.
 
 ## who is working on tasl?
 
