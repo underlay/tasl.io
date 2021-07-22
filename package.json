@@ -23,12 +23,10 @@
 	"dependencies": {
 		"@codemirror/next": "^0.16.0",
 		"@types/react": "^17.0.7",
-		"@types/react-syntax-highlighter": "^13.5.1",
 		"@underlay/apg": "^1.2.6",
 		"@underlay/tasl-codemirror": "0.0.6",
 		"@underlay/tasl-lezer": "0.0.6",
-		"evergreen-ui": "^6.0.1",
-		"hast-to-hyperscript": "^10.0.0",
+		"evergreen-ui": "^6.1.0",
 		"highlight.js": "^11.0.1",
 		"lowlight": "^2.0.1",
 		"next": "^11.0.1",
