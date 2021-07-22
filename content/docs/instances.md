@@ -6,13 +6,15 @@ A tasl _instance_ is a dataset. We call them instances to highlight that they're
 
 ## schema level vs instance level
 
-We also use the words "schema" and "instance" in a more casual sense to refer to the two levels. Every part of a schema has a corresponding part in an instance of that schema:
+We also use the words "schema" and "instance" in a more casual sense to refer to the two levels. Every part of a schema has a corresponding part in an instance of that schema.
 
+```
 | schema level | instance level |
 | ------------ | -------------- |
 | schema       | instance       |
 | class        | element        |
 | type         | value          |
+```
 
 ### instances instantiate schemas
 
