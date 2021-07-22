@@ -91,3 +91,13 @@ A coproduct type is composed of zero or more entries called _options_. An option
 Reference types point to a specific class in the schema; a value of a reference type is a pointer to an individual element of the referenced class.
 
 Reference types are analogous to foreign key constraints in a relational database.
+
+### **pointer**
+
+A _pointer_ is a value of a reference type. There's no real difference between these phrasings:
+
+- "the value of a reference type is an element of the referenced class"
+- "the value of a reference type is a reference to an element of the referenced class"
+- "the value of a reference type is a pointer to an element of the referenced class"
+
+... we just find the last one to be clearer.
