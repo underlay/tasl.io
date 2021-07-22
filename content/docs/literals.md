@@ -6,7 +6,7 @@ In RDF, Literals are defined as a tuple of three elements:
 
 - a unicode string
 - a datatype URI
-- a language tag, if and only if the datatype is the special datatype ` http://www.w3.org/1999/02/22-rdf-syntax-ns#langString`
+- a language tag, if and only if the datatype is the special datatype `rdf:langString`
 
 Since RDF has no concept of "types", all three of these comprise a single RDF term. However in tasl, we lift the datatype URI to the type level. A _literal type_ in tasl is parametrized with a datatype URI, and a value of that type is a Unicode string. (tasl has no concept of language tags)
 
