@@ -52,19 +52,35 @@ Elements intuitively correspond to "rows" in the relational data model. An insta
 
 Each of the five kinds of types are instantiated by a corresponding kind of value. For example, the literal type `integer` is instantiated by integer values `"-1"`, "`1004`", etc, the URI type is instantiated by URI values like `urn:isbn:0-486-27557-4`, and so on.
 
+### **literal**
+
+Literals are one of the primitive types in tasl. Literals are configured with a datatype.
+
+A value of a literal type is a Unicode string, whose possible values are further constrained by the datatype. In general, tasl itself doesn't use the datatype to enforce any constraints on values; it's the responsibility of data producers and consumers to use datatypes to coordinate value formats.
+
+### **datatype**
+
+A _datatype_ is a URI term used to configure a literal type. The datatype is used to indicate the format and meaning of the values of type.
+
+In tasl, literal types for some common datatypes from the XSD namespace are defined as global variables, like `string`, `boolean`, and `dateTime`.
+
 ### **product**
 
-A [product type](https://en.wikipedia.org/wiki/Product_type). Intuitively, a product type represents a combination of its constituent types (called _components_). A value of a product type is tuple with one value for each of its components
+A [product type](https://en.wikipedia.org/wiki/Product_type). Intuitively, a product type represents a combination of its constituent types (called _components_). A value of a product type is tuple with one value for each of its components.
 
 ### **component**
 
 A product type is composed of zero or more entries called _components_. A component has a URI key and a type, and is written as `(key) -> (type)`. Component keys within a product must be unique.
 
+### **unit type**
+
+A _unit type_ is an empty product type, ie a product with no components.
+
 ### **coproduct**
 
-A [sum type](https://en.wikipedia.org/wiki/Tagged_union). Intuitively, a coproduct type represents a choice between its constituent types (called _options_). A value of a coproduct type is a tuple `(key, value)` where `key` is one of the type's option keys, and `value` is a value for that option's type
+A [sum type](https://en.wikipedia.org/wiki/Tagged_union). Intuitively, a coproduct type represents a choice between its constituent types (called _options_). A value of a coproduct type is a tuple `(key, value)` where `key` is one of the type's option keys, and `value` is a value for that option's type.
 
-"Sum type", "variant", "discriminated union", and "tagged union" are all common names for coproducts; we prefer "coproduct" because it's unambiguous to say out loud (unlike "sum type", which can be misunderstood as "some type"), it avoids confusion with untagged union types, and emphasizes its duality with products.
+"Sum type", "variant", "discriminated union", and "tagged union" are all common names for coproducts; we prefer "coproduct" because it avoids confusion with untagged union types, emphasizes its duality with products, and is unambiguous to say out loud (unlike "sum type", which can be misunderstood as "some type").
 
 ### **option**
 
