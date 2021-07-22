@@ -50,7 +50,7 @@ Elements intuitively correspond to "rows" in the relational data model. An insta
 
 ### **value**
 
-Each of the five kinds of types are instantiated by a corresponding kind of value. For example, the literal type `integer` is instantiated by integer values `"-1"`, "`1004`", etc, the URI type is instantiated by URI values like `urn:isbn:0-486-27557-4`, and so on.
+Each of the five kinds of types are instantiated by a corresponding kind of value. For example, the literal type `integer` is instantiated by integer values `"-1"`, `"1004"`, etc, the URI type is instantiated by URI values like `urn:isbn:0-486-27557-4`, and so on.
 
 ### **literal**
 
