@@ -34,6 +34,8 @@ A _schema_ is a set of classes. You can equivalently think of a schema as a map 
 
 A _class_ is one of the top-level entries in a schema. A class has a key and a type.
 
+Classes are roughly analogous to _tables_ in the relational data model. But in tasl, we separate the data describing the structure and layout of the table (a _class_ in a schema) from the data populating the "rows" of the table (elements in an instance).
+
 ### **type**
 
 A _type_ is one of five kinds of types: [literal](/docs/literals), [URI](/docs/uris), [product](/docs/products), [coproduct](/docs/coproduct), or [reference](/docs/references). Types in tasl are classic [algebraic data types](https://en.wikipedia.org/wiki/Algebraic_data_type) augmented with a special reference type.
