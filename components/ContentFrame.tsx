@@ -53,7 +53,7 @@ const ContentFrame: React.FC<ContentFrameProps> = (props) => {
 						</SectionTab>
 					)
 				})}
-				<SectionTab title="playground" href="/playground" />
+				{/* <SectionTab title="playground" href="/playground" /> */}
 				<SectionTab
 					title="GitHub"
 					href="https://github.com/underlay/tasl"
