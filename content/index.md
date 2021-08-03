@@ -1,6 +1,6 @@
 # tiny algebraic schema langauge
 
-tasl is a **schema language for datasets**. It represents a generalized version of the relational data model based on [algebraic data types](https://en.wikipedia.org/wiki/Algebraic_data_type).
+tasl is a **schema language for datasets**. It represents a generalization of the relational data model based on [algebraic data types](https://en.wikipedia.org/wiki/Algebraic_data_type), and resembles a strongly-typed version of RDF.
 
 ```tasl
 # This is a tasl schema!
