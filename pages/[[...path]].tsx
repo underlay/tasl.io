@@ -109,9 +109,9 @@ const components: Components = {
 		</Link>
 	),
 	p: ({ children }) => <Paragraph size={500}>{children}</Paragraph>,
-	code: ({ node, inline, className, children, ...props }) => {
+	code: ({ inline, className, children }) => {
 		if (inline) {
-			return <Code {...props}>{children}</Code>
+			return <Code>{children}</Code>
 		} else {
 			// if (className === "language-tasl") {
 			// 	const content = String(children).replace(/\n$/, "")
@@ -122,7 +122,7 @@ const components: Components = {
 			// 	return <Pane {...props}>{toH(React.createElement, tree)}</Pane>
 			// } else {
 			return (
-				<Pane border background="tint2" overflowX="auto" {...props}>
+				<Pane border background="tint2" overflowX="auto">
 					<Pane width="max-content" padding={majorScale(1)}>
 						<code className={className}>{children}</code>
 					</Pane>
