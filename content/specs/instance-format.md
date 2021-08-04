@@ -123,7 +123,7 @@ class ex:Person/name :: {
 }
 ```
 
-we would encode this instance (given here in an unofficial JSON format)
+we would encode this instance (given here in an informal JSON format)
 
 ```json
 {
