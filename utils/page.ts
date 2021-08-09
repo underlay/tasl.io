@@ -8,5 +8,6 @@ export interface SectionPage extends ContentPage {
 }
 
 export interface PageProps {
+	path: string[]
 	pages: SectionPage[]
 }

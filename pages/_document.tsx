@@ -21,7 +21,6 @@ export default class extends Document<DocumentProps> {
 
 	render() {
 		const { css, hydrationScript } = this.props
-
 		return (
 			<Html>
 				<Head>

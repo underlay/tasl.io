@@ -69,7 +69,7 @@ export const getStaticProps: GetStaticProps<
 	const name = path ? `${path.join("/")}.md` : "index.md"
 	const file = resolve("content", name)
 	const content = readFileSync(file, "utf-8")
-	return { props: { content, pages: getPages() } }
+	return { props: { content, pages: getPages(), path: path || [] } }
 }
 
 const h1: HeadingComponent = ({ children }) => (
@@ -156,7 +156,7 @@ const components: Components = {
 
 const ContentPage: React.FC<ContentPageProps> = (props) => {
 	return (
-		<ContentFrame pages={props.pages}>
+		<ContentFrame pages={props.pages} path={props.path}>
 			<Markdown components={components}>{props.content}</Markdown>
 		</ContentFrame>
 	)
