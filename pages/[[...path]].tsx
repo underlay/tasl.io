@@ -18,7 +18,7 @@ import Markdown from "react-markdown"
 import type {
 	Components,
 	HeadingComponent,
-} from "react-markdown/src/ast-to-react"
+} from "react-markdown/lib/ast-to-react"
 
 // import { toH } from "hast-to-hyperscript"
 // import { Light as SyntaxHighlighter } from "react-syntax-highlighter"
