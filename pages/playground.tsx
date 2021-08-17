@@ -1,12 +1,12 @@
-import React, { useCallback } from "react"
+import React from "react"
 
 import { GetStaticProps } from "next"
-import { majorScale, Pane } from "evergreen-ui"
+// import { majorScale, Pane } from "evergreen-ui"
 
-import Editor from "components/Editor"
 import ContentFrame from "components/ContentFrame"
 
-import { initialValue } from "utils/initialValue"
+// import Editor from "components/Editor"
+// import { initialValue } from "utils/initialValue"
 import { PageProps } from "utils/page"
 import { getPages } from "utils/getPages"
 
@@ -17,12 +17,12 @@ type PlaygroundParams = {}
 interface PlaygroundProps extends PageProps {}
 
 const Playground: React.FC<PlaygroundProps> = (props) => {
-	const handleChange = useCallback((value: string) => {}, [])
+	// const handleChange = useCallback((value: string) => {}, [])
 	return (
 		<ContentFrame pages={props.pages} path={props.path}>
-			<Pane marginY={majorScale(1)}>
+			{/* <Pane marginY={majorScale(1)}>
 				<Editor initialValue={initialValue} onChange={handleChange} />
-			</Pane>
+			</Pane> */}
 		</ContentFrame>
 	)
 }
