@@ -2,7 +2,7 @@
 
 tasl instances can be serialized to binary files, canonically given the `.instance` file extension.
 
-Instances and schemas are represented separately - `.instance` file does not contain the schema for the instance. In other words, given in-memory representation types `Schema` and `Instance`, serialization is always a function of two arguments:
+Instances and schemas are always represented separately - a `.instance` file does not contain the schema for the instance. In other words, given in-memory representation types `Schema` and `Instance`, serialization is always a function of two arguments:
 
 ```typescript
 declare function serialize<S extends Schema>(
@@ -41,7 +41,7 @@ Each serialized class begins with an unsigned varint encoding the total number o
 
 ## values
 
-Elements have no explicit identity or overhead; they are simply represented by serializing their _value_. Since the schema is known in advance, there is no need to _represent_ the types of each value in the serialization, since they are known from the schema.
+Elements have no explicit identity or header; they are simply represented by serializing their value. Since the schema is known in advance, there is no need to represent the types of each value in the instance serialization, since they are known from the schema.
 
 ### URIs
 
@@ -49,9 +49,9 @@ URI values begin with an unsigned varint encoding the length in bytes of the URI
 
 ### literals
 
-Since the datatype of the literal type is known from the schema, only the actual must be serialized.
+Since the datatype of the literal type is known from the schema, only the value needs to be serialized.
 
-The tasl `.instance` format can serialize values of arbitrary datatypes, since all values are represented as UTF-8 strings. Values are serialized with a uvarint length prefix followed by the raw bytes of the value.
+The tasl `.instance` format can serialize values of arbitrary datatypes, since all values are represented (by definition) as UTF-8 strings. Values are serialized with a uvarint length prefix followed by the raw bytes of the value.
 
 **However** the tasl binary format has special cases for the following XSD datatypes:
 
@@ -61,8 +61,8 @@ The tasl `.instance` format can serialize values of arbitrary datatypes, since a
 | `xsd:boolean`            | 1             | `1` for true or `0` for false                     |
 | `xsd:double`             | 4             | IEEE float64                                      |
 | `xsd:float`              | 2             | IEEE float32                                      |
-| `xsd:integer`            | variable      | signed varint (Golang zig-zag encoding)           |
-| `xsd:nonNegativeInteger` | variable      | unsigned varint (Golang encoding)                 |
+| `xsd:integer`            | variable      | signed varint                                     |
+| `xsd:nonNegativeInteger` | variable      | unsigned varint                                   |
 | `xsd:long`               | 8             | int64                                             |
 | `xsd:int`                | 4             | int32                                             |
 | `xsd:short`              | 2             | int16                                             |
@@ -72,8 +72,9 @@ The tasl `.instance` format can serialize values of arbitrary datatypes, since a
 | `xsd:unsignedShort`      | 2             | uint16                                            |
 | `xsd:unsignedByte`       | 1             | uint8                                             |
 | `xsd:hexBinary`          | variable      | a uvarint length prefix followed by the raw bytes |
-| `xsd:base64Binary`       | variable      | a uvarint length prefix followed by the raw bytes |
 ```
+
+As per the XSD spec, `xsd:integer` and `xsd:nonNegativeInteger` values can be arbitrarily large. Unsigned varints use the [Protobuf](https://developers.google.com/protocol-buffers/docs/encoding#varints) / Golang [`encoding/binary`](https://pkg.go.dev/encoding/binary) encoding scheme, only without the 10-byte maximum limit. A signed varint `n` is represented as an unsigned varint: `2n` if `0 <= n` and `-2n - 1` if `n < 0`.
 
 Note that `xsd:positiveInteger`, `xsd:nonPositiveInteger`, and `negativeInteger` do not have special encodings.
 
@@ -87,12 +88,12 @@ For example, in this schema
 namespace ex http://example.com/
 
 class ex:Widget :: {
-  ex:spinniness -> float
+  ex:spinniness -> float64
   ex:deluxe -> boolean
 }
 ```
 
-each `ex:Widget` element would be serialized by five bytes wide - first the `ex:deluxe` component, whose value (`boolean`) would take a fixed single byte, and then the `ex:deluxe` component, whose value (`float`) would take a fixed four bytes.
+each `ex:Widget` element would be serialized by nine bytes wide - first the `ex:deluxe` component, whose value (`boolean`) would take a fixed single byte, and then the `ex:deluxe` component, whose value (`float64`) would take a fixed eight bytes.
 
 ### coproducts
 
@@ -114,7 +115,7 @@ Given this schema
 namespace ex http://example.com/
 
 class ex:Person :: {
-  ex:age -> integer
+  ex:age -> int
 }
 
 class ex:Person/name :: {

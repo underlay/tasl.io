@@ -2,6 +2,8 @@
 
 The documentation pages here are organized in a rough order, but aren't perfectly sorted - you may have to jump around or read through them all several times.
 
+**These docs describe an alpha version of the schema langauge that is still evolving.**
+
 1. [namespaces](/docs/namespaces)
 2. [schemas](/docs/schemas)
 3. [instances](/docs/instances)

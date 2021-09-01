@@ -22,10 +22,6 @@ Some discussion threads on tasl's early development can be found [here](https://
 
 Use "tasl" whenever you can, and "TASL" when you absolutely need to.
 
-## will tasl change? how is it versioned?
-
-The schema language and binary codec are versioned separately. The schema language uses semantic versioning and its current version is `0.1.0`; the binary format is versioned with a single incrementing major version number. and its current version is `1`.
-
 ## what does "algebraic" mean?
 
 In math, an [_algebra_](https://en.wikipedia.org/wiki/Algebra_over_a_field) is any little system that starts with a some initial things, and has two different ways of combining things to get more things.

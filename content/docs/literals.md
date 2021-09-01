@@ -17,11 +17,11 @@ namespace ex http://example.com/
 namespace xsd http://www.w3.org/2001/XMLSchema#
 
 literal myCustomLiteralName ex:hello/world
-literal xsd_integer xsd:integer
+literal integer xsd:integer
 
 class ex:Thing :: {
   ex:foo -> myCustomLiteralName
-  ex:bar -> xsd_integer
+  ex:bar -> integer
 }
 ```
 
@@ -45,44 +45,27 @@ This sounds like a lot of complexity, especially just for primitives! What if we
 
 Fortunately not; tasl has some affordances to make common cases easy. The [XSD namespace](https://www.w3.org/TR/xmlschema11-2/) `http://www.w3.org/2001/XMLSchema#` is the (somewhat) canonical default namespace for literals in RDF, and it includes definitions for all the basic common datatypes like strings, booleans, and various sizes of numbers. In tasl, some of the datatypes from the XSD namespace are defined as _global variables_, meaning you can just use them as bare identifiers without declaring them, and without declaring the XSD namespace itself. These datatypes are
 
-- [`http://www.w3.org/2001/XMLSchema#string`](http://www.w3.org/2001/XMLSchema#string)
-- [`http://www.w3.org/2001/XMLSchema#boolean`](http://www.w3.org/2001/XMLSchema#boolean)
-- [`http://www.w3.org/2001/XMLSchema#double`](http://www.w3.org/2001/XMLSchema#double)
-- [`http://www.w3.org/2001/XMLSchema#float`](http://www.w3.org/2001/XMLSchema#float)
-- [`http://www.w3.org/2001/XMLSchema#decimal`](http://www.w3.org/2001/XMLSchema#decimal), and all atomic types derived from it
-- [`http://www.w3.org/2001/XMLSchema#date`](http://www.w3.org/2001/XMLSchema#date)
-- [`http://www.w3.org/2001/XMLSchema#dateTime`](http://www.w3.org/2001/XMLSchema#dateTime), and all atomic types derived from it
-- [`http://www.w3.org/2001/XMLSchema#hexBinary`](http://www.w3.org/2001/XMLSchema#hexBinary)
-- [`http://www.w3.org/2001/XMLSchema#base64Binary`](http://www.w3.org/2001/XMLSchema#base64Binary)
-
-This means that you can pretend that every schema starts with these global definitions:
-
 ```tasl
 namespace xsd http://www.w3.org/2001/XMLSchema#
 
-literal string             xsd:string
-literal boolean            xsd:boolean
-literal double             xsd:double              # float64
-literal float              xsd:float               # float32
-literal decimal            xsd:decimal
-literal integer            xsd:integer
-literal nonNegativeInteger xsd:nonNegativeInteger
-literal positiveInteger    xsd:positiveInteger
-literal long               xsd:long                # int64
-literal int                xsd:int                 # int32
-literal short              xsd:short               # int16
-literal byte               xsd:byte                # int8
-literal unsignedLong       xsd:unsignedLong        # uint64
-literal unsignedInt        xsd:unsignedInt         # uint32
-literal unsignedShort      xsd:unsignedShort       # uint16
-literal unsignedByte       xsd:unsignedByte        # uint8
-literal nonPositiveInteger xsd:nonPositiveInteger
-literal negativeInteger    xsd:negativeInteger
-literal date               xsd:date
-literal dateTime           xsd:dateTime
-literal dateTimeStamp      xsd:dateTimeStamp
-literal hexBinary          xsd:hexBinary
-literal base64Binary       xsd:base64Binary
+literal string        xsd:string
+literal boolean       xsd:boolean
+literal float32       xsd:float
+literal float64       xsd:double
+literal int           xsd:integer
+literal uint          xsd:nonNegativeInteger
+literal int8          xsd:byte
+literal int16         xsd:short
+literal int32         xsd:int
+literal int64         xsd:long
+literal uint8         xsd:unsignedByte
+literal uint16        xsd:unsignedShort
+literal uint32        xsd:unsignedInt
+literal uint64        xsd:unsignedLong
+literal binary        xsd:hexBinary
+literal date          xsd:date
+literal dateTime      xsd:dateTime
+literal dateTimeStamp xsd:dateTimeStamp
 ```
 
 The XSD spec defines some of these as "derivations" of others, which you can see in [this diagram](https://www.w3.org/TR/xmlschema11-2/#built-in-datatypes), but tasl doesn't know or care about that part. To tasl, these are all just opaque URIs.
@@ -105,7 +88,7 @@ namespace ex http://example.com/
 
 class ex:Person {
   ex:name -> string
-  ex:age -> nonNegativeInteger
+  ex:age -> uint
 }
 ```
 

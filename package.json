@@ -22,7 +22,6 @@
 	"homepage": "https://github.com/underlay/tasl.io#readme",
 	"dependencies": {
 		"@types/react": "^17.0.7",
-		"@underlay/apg": "^1.2.6",
 		"evergreen-ui": "^6.3.0",
 		"next": "^11.0.1",
 		"react": "^17.0.2",

@@ -59,7 +59,7 @@ One common way that we use references is to model properties that can have multp
 namespace ex http://example.com/
 
 class ex:Person :: {
-  ex:age -> integer
+  ex:age -> uint
   ex:name -> string
 }
 ```
@@ -70,7 +70,7 @@ class ex:Person :: {
 namespace ex http://example.com/
 
 class ex:Person :: {
-  ex:age -> integer
+  ex:age -> uint
   ex:name -> ? string
 }
 ```
@@ -81,7 +81,7 @@ class ex:Person :: {
 namespace ex http://example.com/
 
 class ex:Person :: {
-  ex:age -> integer
+  ex:age -> uint
 }
 
 class ex:Person/name :: {
@@ -146,7 +146,7 @@ Here's a more interesting kind of self-reference:
 namespace ex http://example.com/
 
 class ex:ListOfIntegers :: ? {
-  ex:head -> integer
+  ex:head -> int
   ex:tail -> * ex:ListOfIntegers
 }
 ```
@@ -161,7 +161,7 @@ If we wanted to model _non-empty_ linked lists, we could tweak our class declara
 namespace ex http://example.com/
 
 class ex:ListOfIntegers :: {
-  ex:head -> integer
+  ex:head -> int
   ex:tail -> ? * ex:ListOfIntegers
 }
 ```
