@@ -20,6 +20,15 @@ import type {
 	HeadingComponent,
 } from "react-markdown/lib/ast-to-react"
 
+import type { LRLanguage } from "@codemirror/language"
+import { fromCodeMirror } from "hast-util-from-codemirror"
+import { taslLanguage } from "codemirror-lang-tasl"
+import {
+	javascriptLanguage,
+	jsxLanguage,
+	tsxLanguage,
+	typescriptLanguage,
+} from "@codemirror/lang-javascript"
 import { toH } from "hast-to-hyperscript"
 
 import { readFileSync } from "fs"
@@ -29,10 +38,6 @@ import ContentFrame from "components/ContentFrame"
 import { getPages, getPaths } from "utils/getPages"
 import { PageProps } from "utils/page"
 import { theme } from "utils/theme"
-import { fromCodeMirror } from "hast-util-from-codemirror"
-import { taslLanguage } from "codemirror-lang-tasl"
-
-import "hast-util-from-codemirror/styles/default.css"
 
 type ContentPageParams = { path?: string[] }
 
@@ -42,6 +47,16 @@ interface ContentPageProps extends PageProps {
 
 export const config = {
 	unstable_runtimeJS: false,
+}
+
+const languages: Record<string, LRLanguage> = {
+	"language-tasl": taslLanguage,
+	"language-typescript": typescriptLanguage,
+	"language-ts": typescriptLanguage,
+	"language-tsx": tsxLanguage,
+	"language-javascript": javascriptLanguage,
+	"language-js": javascriptLanguage,
+	"language-jsx": jsxLanguage,
 }
 
 export const getStaticPaths: GetStaticPaths<ContentPageParams> = async ({}) => {
@@ -112,28 +127,27 @@ const components: Components = {
 	code: ({ inline, className, ...props }) => {
 		if (inline) {
 			return <Code>{props.children}</Code>
+		} else if (className !== undefined && className in languages) {
+			const source = String(props.children).replace(/\n+$/, "")
+			const { parser } = languages[className]
+			const tree = parser.parse(source)
+			const root = fromCodeMirror(source, tree)
+			const content = toH(React.createElement, root)
+			return (
+				<Pane border background="tint2" overflowX="auto">
+					<Pane width="max-content" padding={majorScale(1)}>
+						{content}
+					</Pane>
+				</Pane>
+			)
 		} else {
-			if (className === "language-tasl") {
-				const source = String(props.children).replace(/\n+$/, "")
-				const tree = taslLanguage.parser.parse(source)
-				const element = fromCodeMirror(source, tree)
-				const content = toH(React.createElement, element)
-				return (
-					<Pane border background="tint2" overflowX="auto">
-						<Pane width="max-content" padding={majorScale(1)}>
-							{content}
-						</Pane>
+			return (
+				<Pane border background="tint2" overflowX="auto">
+					<Pane width="max-content" padding={majorScale(1)}>
+						<code className={className}>{props.children}</code>
 					</Pane>
-				)
-			} else {
-				return (
-					<Pane border background="tint2" overflowX="auto">
-						<Pane width="max-content" padding={majorScale(1)}>
-							<code className={className}>{props.children}</code>
-						</Pane>
-					</Pane>
-				)
-			}
+				</Pane>
+			)
 		}
 	},
 	em: ({ children }) => <em>{children}</em>,

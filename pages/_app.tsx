@@ -8,6 +8,8 @@ import { theme } from "utils/theme"
 
 import "../styles.css"
 
+import "hast-util-from-codemirror/styles/default.css"
+
 const App: React.FC<AppProps> = (props) => {
 	const { Component, pageProps } = props
 	const { asPath } = useRouter()

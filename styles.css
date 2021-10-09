@@ -21,11 +21,6 @@
 	src: url("/Fonts/FiraCode/FiraCode-Regular.woff2") format("woff2");
 }
 
-/* @font-face {
-	font-family: "Go Mono";
-	src: url("/Fonts/GoMono/GoMonoRegular.ttf") format("truetype");
-} */
-
 html {
 	background-color: seashell;
 	text-size-adjust: none;
@@ -33,8 +28,7 @@ html {
 }
 
 body {
-	max-width: 824px;
-	min-width: 600px;
+	width: 824px;
 	margin: 48px auto;
 }
 
@@ -42,8 +36,8 @@ blockquote {
 	margin: 8px;
 }
 
-code {
-	/* font-family: "Go Mono", monospace; */
+code,
+pre {
 	font-family: "Fira Code", monospace;
 	font-size: 14px;
 }
