@@ -11,7 +11,9 @@ import { PageProps } from "utils/page"
 import { getPages } from "utils/getPages"
 
 export const getStaticProps: GetStaticProps<PlaygroundProps, PlaygroundParams> =
-	async ({}) => ({ props: { pages: getPages(), path: ["playground"] } })
+	async ({}) => {
+		return { props: { pages: getPages(), path: ["playground"] } }
+	}
 
 type PlaygroundParams = {}
 interface PlaygroundProps extends PageProps {}

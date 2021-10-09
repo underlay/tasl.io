@@ -12,14 +12,14 @@ Since RDF has no concept of "types", all three of these comprise a single RDF te
 
 Literal types are special in tasl in that they don't have an inline syntax - they can only be defined using `literal` keyword statements.
 
-```
+```tasl
 namespace ex http://example.com/
 namespace xsd http://www.w3.org/2001/XMLSchema#
 
 literal myCustomLiteralName ex:hello/world
 literal integer xsd:integer
 
-class ex:Thing :: {
+class ex:Thing {
   ex:foo -> myCustomLiteralName
   ex:bar -> integer
 }
@@ -63,9 +63,6 @@ literal uint16        xsd:unsignedShort
 literal uint32        xsd:unsignedInt
 literal uint64        xsd:unsignedLong
 literal binary        xsd:hexBinary
-literal date          xsd:date
-literal dateTime      xsd:dateTime
-literal dateTimeStamp xsd:dateTimeStamp
 ```
 
 The XSD spec defines some of these as "derivations" of others, which you can see in [this diagram](https://www.w3.org/TR/xmlschema11-2/#built-in-datatypes), but tasl doesn't know or care about that part. To tasl, these are all just opaque URIs.
@@ -75,7 +72,7 @@ You don't have to remember to include the XSD namespace in every schema, and you
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person :: {
+class ex:Person {
   ex:name -> string
   ex:age -> integer
 }

@@ -17,17 +17,17 @@ For example, rewriting
 ```tasl
 namespace ex http://example.com/
 
-class ex:IssueTicket :: {
+class ex:IssueTicket {
   ex:closed -> boolean
 }
 ```
 
 into
 
-```
+```tasl
 namespace ex http://example.com/
 
-class ex:IssueTicket :: {
+class ex:IssueTicket {
   ex:status -> [
     ex:open
     ex:closed

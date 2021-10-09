@@ -7,9 +7,9 @@ An instance of this schema is equivalent to an RDF _dataset_.
 ```tasl
 namespace ex http://example.com/
 
-class ex:BlankNode :: {}
+class ex:BlankNode {}
 
-class ex:Statement :: {
+class ex:Statement {
   ex:subject -> [
     ex:blankNode <- * ex:BlankNode
     ex:iri <- <>
@@ -67,29 +67,29 @@ type value [
 # element.
 
 # so we model products as a unit class...
-class ul:product :: {}
+class ul:product {}
 
 # ... and components as their own class, each element
 # of which is "attached" to a source product element.
 # This way, each individual ul:product element can "have"
 # arbitrarily many components.
-class ul:component :: {
+class ul:component {
   ul:source -> * ul:product
   ul:key -> <>
   ul:value -> value
 }
 
 # ... and we do the same for coproducts.
-class ul:coproduct :: {}
+class ul:coproduct {}
 
-class ul:option :: {
+class ul:option {
   ul:source -> * ul:coproduct
   ul:key -> <>
   ul:value -> value
 }
 
 # a class is just a key and a type.
-class ul:class :: {
+class ul:class {
   ul:key -> <>
   ul:value -> value
 }
@@ -98,13 +98,13 @@ class ul:class :: {
 An instance of this schema is equivalent to one individual tasl schema. That's why there's no "`ul:schema'" class - an entire instance is an entire schema. If we wanted, we could add a "schema class"...
 
 ```
-class ul:schema :: {}
+class ul:schema {}
 ```
 
 ... and modify classes to "belong" to a particular schema...
 
 ```
-class ul:class :: {
+class ul:class {
   ul:source -> * ul:schema
   # ...
 }

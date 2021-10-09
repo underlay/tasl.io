@@ -20,12 +20,7 @@ import type {
 	HeadingComponent,
 } from "react-markdown/lib/ast-to-react"
 
-// import { toH } from "hast-to-hyperscript"
-// import { Light as SyntaxHighlighter } from "react-syntax-highlighter"
-// import dark from "react-syntax-highlighter/dist/cjs/styles/hljs/dark"
-
-// import { lowlight } from "lowlight/lib/core.js"
-// import tasl from "highlightjs-tasl"
+import { toH } from "hast-to-hyperscript"
 
 import { readFileSync } from "fs"
 import { resolve } from "path"
@@ -34,8 +29,10 @@ import ContentFrame from "components/ContentFrame"
 import { getPages, getPaths } from "utils/getPages"
 import { PageProps } from "utils/page"
 import { theme } from "utils/theme"
+import { fromCodeMirror } from "hast-util-from-codemirror"
+import { taslLanguage } from "codemirror-lang-tasl"
 
-// lowlight.registerLanguage("tasl", tasl)
+import "hast-util-from-codemirror/styles/default.css"
 
 type ContentPageParams = { path?: string[] }
 
@@ -69,7 +66,10 @@ export const getStaticProps: GetStaticProps<
 	const name = path ? `${path.join("/")}.md` : "index.md"
 	const file = resolve("content", name)
 	const content = readFileSync(file, "utf-8")
-	return { props: { content, pages: getPages(), path: path || [] } }
+
+	return {
+		props: { content, pages: getPages(), path: path || [] },
+	}
 }
 
 const h1: HeadingComponent = ({ children }) => (
@@ -109,38 +109,33 @@ const components: Components = {
 		</Link>
 	),
 	p: ({ children }) => <Paragraph size={500}>{children}</Paragraph>,
-	code: ({ inline, className, children }) => {
+	code: ({ inline, className, ...props }) => {
 		if (inline) {
-			return <Code>{children}</Code>
+			return <Code>{props.children}</Code>
 		} else {
-			// if (className === "language-tasl") {
-			// 	const content = String(children).replace(/\n$/, "")
-			// 	console.log("content", content)
-			// 	console.log(lowlight.highlight)
-			// 	const tree = lowlight.highlight("tasl", content)
-			// 	console.log("tree", tree)
-			// 	return <Pane {...props}>{toH(React.createElement, tree)}</Pane>
-			// } else {
-			return (
-				<Pane border background="tint2" overflowX="auto">
-					<Pane width="max-content" padding={majorScale(1)}>
-						<code className={className}>{children}</code>
+			if (className === "language-tasl") {
+				const source = String(props.children).replace(/\n+$/, "")
+				const tree = taslLanguage.parser.parse(source)
+				const element = fromCodeMirror(source, tree)
+				const content = toH(React.createElement, element)
+				return (
+					<Pane border background="tint2" overflowX="auto">
+						<Pane width="max-content" padding={majorScale(1)}>
+							{content}
+						</Pane>
 					</Pane>
-				</Pane>
-			)
-			// }
+				)
+			} else {
+				return (
+					<Pane border background="tint2" overflowX="auto">
+						<Pane width="max-content" padding={majorScale(1)}>
+							<code className={className}>{props.children}</code>
+						</Pane>
+					</Pane>
+				)
+			}
 		}
 	},
-	// code: ({ inline, children, ...rest }) =>
-	// 	inline ? (
-	// 		<Code>{children}</Code>
-	// 	) : (
-	// 		<Pane border background="tint2" overflowX="auto">
-	// 			<Pane width="max-content" padding={majorScale(1)}>
-	// 				{children}
-	// 			</Pane>
-	// 		</Pane>
-	// 	),
 	em: ({ children }) => <em>{children}</em>,
 	strong: ({ children }) => <strong>{children}</strong>,
 	ul: ({ children }) => <UnorderedList>{children}</UnorderedList>,

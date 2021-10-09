@@ -30,9 +30,9 @@ After the version number, the contents of each class are serialized in lexicogra
 ```tasl
 namespace ex http://example.com/
 
-class ex:Foo :: <>
+class ex:Foo <>
 
-class ex:Bar :: <>
+class ex:Bar <>
 ```
 
 ... the elements in class `ex:Bar` would be serialized first, followed by the elements in `ex:Foo`.
@@ -87,7 +87,7 @@ For example, in this schema
 ```tasl
 namespace ex http://example.com/
 
-class ex:Widget :: {
+class ex:Widget {
   ex:spinniness -> float64
   ex:deluxe -> boolean
 }
@@ -114,11 +114,11 @@ Given this schema
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person :: {
+class ex:Person {
   ex:age -> int
 }
 
-class ex:Person/name :: {
+class ex:Person/name {
   ex:person -> * ex:Person
   ex:name -> string
 }
@@ -152,23 +152,23 @@ we would encode this instance (given here in an informal JSON format)
 as the byte array
 
 ```
-0x010232580B4A696D2048616C70657274000A50616D20426565736C79011550616D656C61204D6F7267616E2048616C7065727401
+010232580B4A696D2048616C70657274000A50616D20426565736C79011550616D656C61204D6F7267616E2048616C7065727401
 ```
 
 ... which is the concatenation of these parts:
 
-1. `0x01` is the serialization version number
-2. `0x02` is the number of elements in the `ex:Person` class
-3. `0x32` is the signed varint for 25 (the product has only one component)
-4. `0x58` is the signed varint for 44
-5. `0x0B` the length of the string `Jim Halpert` (`http://example.com/name` lexicographically preceeds `http://example.com/person`)
-6. `0x4A696D2048616C70657274` the content of the string `Jim Halpert`
-7. `0x00` the index of the referenced `ex:Person` element
-8. `0x0A` the length of the string `Pam Beesly`
-9. `0x50616D20426565736C79` the content of the string `Pam Beesly`
-10. `0x01` the index of the referenced `ex:Person` element
-11. `0x15` the length of the string `Pamela Morgan Halpert`
-12. `0x50616D656C61204D6F7267616E2048616C70657274` the content of the string `Pamela Morgan Halpert`
-13. `0x01` the index of the referenced `ex:Person` element
+1. `01` is the serialization version number
+2. `02` is the number of elements in the `ex:Person` class
+3. `32` is the signed varint for 25 (the product has only one component)
+4. `58` is the signed varint for 44
+5. `0B` the length of the string `Jim Halpert` (`http://example.com/name` lexicographically preceeds `http://example.com/person`)
+6. `4A696D2048616C70657274` the content of the string `Jim Halpert`
+7. `00` the index of the referenced `ex:Person` element
+8. `0A` the length of the string `Pam Beesly`
+9. `50616D20426565736C79` the content of the string `Pam Beesly`
+10. `01` the index of the referenced `ex:Person` element
+11. `15` the length of the string `Pamela Morgan Halpert`
+12. `50616D656C61204D6F7267616E2048616C70657274` the content of the string `Pamela Morgan Halpert`
+13. `01` the index of the referenced `ex:Person` element
 
 This serialized instance is 104 bytes (compared to 423 bytes for the indented JSON version and 352 bytes for the JSON with all whitespace stripped).

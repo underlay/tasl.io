@@ -13,11 +13,11 @@ Use coproducts when you need to model a value that can be one of several differe
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person :: {
+class ex:Person {
   ex:name -> string
 }
 
-class ex:Corporation :: {
+class ex:Corporation {
   ex:name -> string
   ex:ownedBy -> [
     ex:ownedByPerson <- * ex:Person
@@ -33,7 +33,7 @@ Here's a slightly different example, where a coproduct is used to represent mult
 ```tasl
 namespace ex http://example.com/
 
-class ex:BookStore :: {
+class ex:BookStore {
   ex:name -> string
   ex:location -> [
     ex:coordinates <- {
@@ -77,7 +77,7 @@ One really powerful way to use coproducts is to make a "coproduct of units":
 ```tasl
 namespace ex http://example.com/
 
-class ex:IssueTicket :: {
+class ex:IssueTicket {
   ex:title -> string
   ex:content -> string
   ex:status -> [
@@ -103,7 +103,7 @@ In tasl, you can abbreviate a coproduct of units by ommitting the `<- {}` entire
 ```tasl
 namespace ex http://example.com/
 
-class ex:IssueTicket :: {
+class ex:IssueTicket {
   ex:title -> string
   ex:content -> string
   ex:status -> [
@@ -116,11 +116,11 @@ class ex:IssueTicket :: {
 
 You can only do this for coproducts. For example,
 
-```
+```tasl
 namespace ex http://example.com/
 
-type test {
-  ex:hello
+class ex:Thing {
+  ex:widget
 }
 ```
 
@@ -131,7 +131,7 @@ Sometimes you want to create a sort of hybrid enum type that has data associated
 ```tasl
 namespace ex http://example.com/
 
-class ex:IssueTicket :: {
+class ex:IssueTicket {
   ex:title -> string
   ex:content -> string
   ex:status -> [
@@ -152,7 +152,7 @@ You should use enums as much as possible! They're appropriate for anything that 
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person :: {
+class ex:Person {
   ex:name -> string
   ex:isDeceased -> boolean
 }
@@ -163,7 +163,7 @@ class ex:Person :: {
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person :: {
+class ex:Person {
   ex:name -> string
   ex:status -> [
     ex:living
@@ -181,7 +181,7 @@ We can use the coproduct + unit pattern to model _optional properties_. Here we 
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person :: {
+class ex:Person {
   ex:name -> string
   ex:favoriteBook -> [
     ex:doesNotHaveAFavoriteBook <- {}
@@ -195,30 +195,21 @@ class ex:Book {
 }
 ```
 
-This kind of structure - a coproduct of a unit and something else - is so common that tasl has a special shorthand syntax for it. In tasl, the _optional operator_ `? (type)` expands to a coproduct
+This kind of structure - a coproduct of a unit and something else - is so common that it would be tedious to keep re-inventing descriptive terms for the "something" and "nothing" cases of coproducts. The Underlay namespace has general-purpose terms for these that we can use instead:
 
-```
-[
-  ul:none <- {}
-  ul:some <- (type)
-]
-```
-
-This is really convenient because it means we don't have to worry about coming up with names for the two options `ex:doesNotHaveAFavoriteBook` and `ex:hasAFavoriteBook`; we can just write:
+- `http://underlay.org/ns/some`
+- `http://underlay.org/ns/none`
 
 ```tasl
+namespace ul http://underlay.org/ns/
 namespace ex http://example.com/
 
 class ex:Person {
   ex:name -> string
-
-  # the `?` is the optional operator.
-  # it turns the type `* ex:Book` into the type
-  # [
-  #   ul:none
-  #   ul:some <- * ex:Book
-  # ]
-  ex:favoriteBook -> ? * ex:Book
+  ex:favoriteBook -> [
+    ul:none
+    ul:some <- * ex:Book
+  ]
 }
 
 class ex:Book {
@@ -227,6 +218,4 @@ class ex:Book {
 }
 ```
 
-The full URIs that the optional operator uses for its option keys are `http://underlay.org/ns/some` and `http://underlay.org/ns/none`, but we canonically abbreviate them using the `ul` prefix. You don't have to declare this namespace in your schema in order to use the optional operator, but it good to keep in mind that the option keys are still there, they're just hidden defaults.
-
-You should use the optional operator whenever a value might or might not exist. In some schemas, you might end up using the optional operator almost everywhere. But don't make an automatic habit out of making things optional - it's good to explicitly say that things are required whenever they really are.
+You should use the optional coproduct pattern whenever a value might or might not exist. In some schemas, you might end up writing it almost everywhere. But don't make an automatic habit out of making things optional - it's good to explicitly say that things are required whenever they really are.

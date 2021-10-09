@@ -53,7 +53,7 @@ If the thing that you're modeling is a person (alive, dead, undead, or fictional
 ```tasl
 namespace schema http://schema.org/
 
-class schema:Person :: {
+class schema:Person {
   schema:name -> string
 }
 ```

@@ -7,7 +7,7 @@ The syntax for the uri type is an empty pair of angle brackets: `<>`
 ```tasl
 namespace ex http://example.com/
 
-class ex:Book :: {
+class ex:Book {
   ex:title -> string
   ex:isbn -> <>
 }
@@ -18,7 +18,7 @@ Alternatively, you might find the global variable `uri` more readable:
 ```tasl
 namespace ex http://example.com/
 
-class ex:Book :: {
+class ex:Book {
   ex:title -> string
   ex:isbn -> uri
 }
@@ -37,7 +37,7 @@ Typically, when you use the URI type somewhere in a schema, you expect all of th
 ```tasl
 namespace ex http://example.com/
 
-class ex:Book :: {
+class ex:Book {
   # These should be ISBN URNs, e.g. urn:isbn:0-486-27557-4
   ex:isbn -> <>
   ex:title -> string
@@ -69,13 +69,13 @@ These are all better modeled using the URI type than as literal string values (o
 ```tasl
 namespace ex http://example.com/
 
-class ex:User :: {
+class ex:User {
   # mailto:...
   ex:email -> <>
   ex:username -> string
 }
 
-class ex:Repository :: {
+class ex:Repository {
   # git://...
   ex:id -> <>
   ex:owner -> * ex:User
@@ -111,14 +111,14 @@ IMDB is a good example. Every movie in their database is identified by a short i
 ```tasl
 namespace imdb http://imdb.com/
 
-class imdb:Movie :: {
+class imdb:Movie {
   # http://imdb.com/title/tt0492494
   imdb:id -> <>
   imdb:title -> string
   # ...
 }
 
-class imdb:Actor :: {
+class imdb:Actor {
   # http://imdb.com/name/nm1055413
   imdb:id -> <>
   imdb:name -> string
@@ -152,7 +152,7 @@ The recommended way to model website URLs (that are meant to link to a webpage) 
 ```tasl
 namespace imdb http://imdb.com/
 
-class imdb:Movie :: {
+class imdb:Movie {
   # http://imdb.com/title/tt0492494
   imdb:id -> <>
 

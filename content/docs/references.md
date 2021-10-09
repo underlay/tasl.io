@@ -5,12 +5,12 @@ The last kind of type that we have in tasl is _reference types_. A reference typ
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person :: {
+class ex:Person {
   ex:name -> string
-  ex:favoriteBook -> ? * ex:Book
+  ex:favoriteBook -> * ex:Book
 }
 
-class ex:Book :: {
+class ex:Book {
   ex:title -> string
   ex:isbn -> <>
 }
@@ -35,9 +35,9 @@ Often you'll be faced with a choice between inlining a type and splitting it out
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person2 :: {
+class ex:Person2 {
   ex:name -> string
-  ex:favoriteBook -> ? {
+  ex:favoriteBook -> {
     ex:title -> string
     ex:isbn -> <>
   }
@@ -58,7 +58,7 @@ One common way that we use references is to model properties that can have multp
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person :: {
+class ex:Person {
   ex:age -> uint
   ex:name -> string
 }
@@ -68,10 +68,14 @@ class ex:Person :: {
 
 ```tasl
 namespace ex http://example.com/
+namespace ul http://underlay.org/ns/
 
-class ex:Person :: {
+class ex:Person {
   ex:age -> uint
-  ex:name -> ? string
+  ex:name -> [
+    ul:none
+    ul:some <- string
+  ]
 }
 ```
 
@@ -80,17 +84,17 @@ class ex:Person :: {
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person :: {
+class ex:Person {
   ex:age -> uint
 }
 
-class ex:Person/name :: {
+class ex:Person/name {
   ex:person -> * ex:Person
   ex:name -> string
 }
 ```
 
-In this schema, we can have arbitrarily many people elements, each of whom has exactly one integer age. Separately, we have arbitrarly many `ex:Person/name`, each of which points to a person element and also has a string name. Retriving the set of names that are associated with a given person just amounts to retriving the `ex:Person/name` elements that reference to that person.
+In this schema, we can have arbitrarily many people elements, each of whom has exactly one unsigned integer age. Separately, we have arbitrarly many `ex:Person/name`, each of which points to a person element and also has a string name. Retriving the set of names that are associated with a given person just amounts to retriving the `ex:Person/name` elements that reference to that person.
 
 Writing separate classes for multi-properties like this is definitely a little awkward. It's good practice to give these "property classes" verbose, obvious names like `ex:Person/name` to indicate that they're not proper conceptual objects. "Property class" is an informal term for classes that are used to link other classes with values.
 
@@ -101,9 +105,9 @@ Another useful general pattern is to use references to unit classes as a way to 
 ```tasl
 namespace ex http://example.com/
 
-class ex:Node :: {}
+class ex:Node {}
 
-class ex:Edge :: {
+class ex:Edge {
   ex:source -> * ex:Node
   ex:target -> * ex:Node
 }
@@ -116,11 +120,11 @@ But let's say we wanted to turn this schema into a [hypergraph data model](https
 ```tasl
 namespace ex http://example.com/
 
-class ex:Node :: {}
+class ex:Node {}
 
-class ex:Hyperedge :: {}
+class ex:Hyperedge {}
 
-class ex:Hyperedge/includes :: {
+class ex:Hyperedge/includes {
   ex:edge -> * ex:Hyperedge
   ex:node -> * ex:Node
 }
@@ -135,7 +139,7 @@ Technically, you can even define a class to be a reference to itself:
 ```tasl
 namespace ex http://example.com/
 
-class ex:Useless :: * ex:Useless
+class ex:Useless * ex:Useless
 ```
 
 ... although this structure isn't very useful. An instance of this schema could have arbitrarly many elements of the `ex:Useless` class; each one would have to point to another (or itself).
@@ -145,13 +149,16 @@ Here's a more interesting kind of self-reference:
 ```tasl
 namespace ex http://example.com/
 
-class ex:ListOfIntegers :: ? {
-  ex:head -> int
-  ex:tail -> * ex:ListOfIntegers
-}
+class ex:ListOfIntegers [
+  ul:none
+  ul:some <- {
+    ex:head -> int
+    ex:tail -> * ex:ListOfIntegers
+  }
+]
 ```
 
-The class `ex:ListOfIntegers` is either nothing - the `ex:none` option of the `?` coproduct - or (in the `ex:some` option of the `?` coproduct) a product of two components: an `integer` and a pointer to another `ex:ListOfIntegers` element. This means that an element of `ex:ListOfIntegers` is either null (the empty list) or an integer and another element.
+The class `ex:ListOfIntegers` is either nothing (in the `ex:none` option) or (in the `ex:some` option) a product of two components: an `integer` and a pointer to another `ex:ListOfIntegers` element. This means that an element of `ex:ListOfIntegers` is either "null" (the empty list) or an integer and another element.
 
 As the name implies, this effectively models a [linked list](https://en.wikipedia.org/wiki/Linked_list) of integers.
 
@@ -160,9 +167,12 @@ If we wanted to model _non-empty_ linked lists, we could tweak our class declara
 ```tasl
 namespace ex http://example.com/
 
-class ex:ListOfIntegers :: {
+class ex:ListOfIntegers {
   ex:head -> int
-  ex:tail -> ? * ex:ListOfIntegers
+  ex:tail -> [
+    ul:none
+    ul:some <- * ex:ListOfIntegers
+  ]
 }
 ```
 

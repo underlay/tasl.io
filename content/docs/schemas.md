@@ -19,7 +19,7 @@ In tasl, we declare classes using the `class` keyword. Here's a schema with one 
 ```tasl
 namespace ex http://example.com/
 
-class ex:Thing :: {}
+class ex:Thing {}
 ```
 
 Other classes can have more complex types:
@@ -27,14 +27,12 @@ Other classes can have more complex types:
 ```tasl
 namespace ex http://example.com/
 
-class ex:Person :: {
+class ex:Person {
   ex:name -> string
-  ex:bestFriend -> ? * ex:Person
   ex:favoriteColor -> [
     ex:red
     ex:green
+    ex:blue
   ]
 }
 ```
-
-The `::` token always indicates a class declaration. In the future, tasl may introduce other keyword statements that let us declare common kinds of classes using compact, specialized syntax, but these will always follow the `[keyword] [class key] :: (...)` pattern.
