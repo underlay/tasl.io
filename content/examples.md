@@ -40,7 +40,7 @@ We could have simplifing the schema to just model RDF _graphs_ by removing the `
 
 We can also model tasl schemas themselves as instances of a _schema schema_.
 
-```
+```tasl
 # tasl schemas are canonically modelled using terms from
 # the underlay namespace
 namespace ul http://underlay.org/ns/
@@ -97,13 +97,13 @@ class ul:class {
 
 An instance of this schema is equivalent to one individual tasl schema. That's why there's no "`ul:schema'" class - an entire instance is an entire schema. If we wanted, we could add a "schema class"...
 
-```
+```tasl
 class ul:schema {}
 ```
 
 ... and modify classes to "belong" to a particular schema...
 
-```
+```tasl
 class ul:class {
   ul:source -> * ul:schema
   # ...
