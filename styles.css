@@ -36,8 +36,11 @@ blockquote {
 	margin: 8px;
 }
 
-code,
 pre {
+	tab-size: 2;
+}
+
+code {
 	font-family: "Fira Code", monospace;
 	font-size: 14px;
 }
