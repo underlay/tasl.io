@@ -1,8 +1,8 @@
 # the URI type
 
-In addition to literals, tasl schemas have a separate kind of primitive type for URIs. Here, we're not talking about the URIs that we use _in_ schemas to label classes, properties, and datatypes - we're talking about a simple, single type called "uri" that we use as a type for URI values in datasets. If you have a bunch of URI values in your dataset, you want to use the URI type in your schema.
+In addition to literals, tasl schemas have a separate kind of primitive type for URIs. Here, we're not talking about the URIs that we use _in_ schemas to label classes, properties, and datatypes - we're talking about a simple, single type called "URI" that we use as a type for URI values in datasets. If you have a bunch of URI values in your dataset, you want to use the URI type in your schema.
 
-The syntax for the uri type is an empty pair of angle brackets: `<>`
+The syntax for the URI type is an empty pair of angle brackets: `<>`
 
 ```tasl
 namespace ex http://example.com/
@@ -11,23 +11,6 @@ class ex:Book {
   ex:title -> string
   ex:isbn -> <>
 }
-```
-
-Alternatively, you might find the global variable `uri` more readable:
-
-```tasl
-namespace ex http://example.com/
-
-class ex:Book {
-  ex:title -> string
-  ex:isbn -> uri
-}
-```
-
-Just like `string` and `integer`, `uri` is defined globally for all tasl schemas:
-
-```tasl
-type uri <>
 ```
 
 Intuitively, we use the URI type for values that are _global identifiers_, like ISBN numbers, DOIs, database UUIDs, etc. In the same way that we use datatypes to coordinate at the schema/type level, we use URIs (ie URI values) to coordinate at the collection/value level. URIs are the way that a collection exposes identifiers to the world; they're the handles that we will use for matching, joining, co-identifying, etc. across collections.
