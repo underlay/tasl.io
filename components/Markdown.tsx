@@ -88,7 +88,6 @@ const components: Components = {
 			const tree = parser.parse(source)
 			const root = fromCodeMirror(source, tree)
 			const content = toH(React.createElement, root)
-			// return <code >{content}</code>
 			return (
 				<Pane border background="tint2" overflowX="auto">
 					<Pane width="max-content" padding={majorScale(1)}>

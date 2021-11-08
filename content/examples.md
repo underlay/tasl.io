@@ -12,24 +12,24 @@ class ex:BlankNode {}
 class ex:Statement {
   ex:subject -> [
     ex:blankNode <- * ex:BlankNode
-    ex:iri <- <>
+    ex:iri <- uri
   ]
-  ex:predicate -> <>
+  ex:predicate -> uri
   ex:object -> [
     ex:blankNode <- * ex:BlankNode
-    ex:iri <- <>
+    ex:iri <- uri
     ex:literal <- {
       ex:value -> string
       ex:languageOrDatatype -> [
         ex:language <- string
-        ex:datatype <- <>
+        ex:datatype <- uri
       ]
     }
   ]
   ex:graph -> [
     ex:defaultGraph
     ex:blankNode <- * ex:BlankNode
-    ex:iri <- <>
+    ex:iri <- uri
   ]
 }
 ```
@@ -50,7 +50,7 @@ type value [
   # the uri type, which doesn't need any configuration values
   ul:uri
   # literal types, which are parametrized by a URI datatype
-  ul:literal <- <>
+  ul:literal <- uri
   # product and coproduct types, which we'll explain next
   ul:product <- * ul:product
   ul:coproduct <- * ul:coproduct
@@ -75,7 +75,7 @@ class ul:product {}
 # arbitrarily many components.
 class ul:component {
   ul:source -> * ul:product
-  ul:key -> <>
+  ul:key -> uri
   ul:value -> value
 }
 
@@ -84,13 +84,13 @@ class ul:coproduct {}
 
 class ul:option {
   ul:source -> * ul:coproduct
-  ul:key -> <>
+  ul:key -> uri
   ul:value -> value
 }
 
 # a class is just a key and a type.
 class ul:class {
-  ul:key -> <>
+  ul:key -> uri
   ul:value -> value
 }
 ```
@@ -111,3 +111,67 @@ class ul:class {
 ```
 
 ... which would give us a schema whose instances are collections of many schemas.
+
+## tasl mappings
+
+```tasl
+namespace ul http://underlay.org/ns/
+
+class ul:map {
+  ul:source -> uri
+  ul:target -> uri
+  ul:value -> expression
+}
+
+type value [
+  ul:map <- * ul:map
+  ul:case <- * ul:case
+  ul:projection <- * ul:projection
+  ul:dereference <- * ul:dereference
+]
+
+class ul:projection {
+  ul:key -> uri
+  ul:value -> value
+}
+
+class ul:dereference {
+  ul:key -> uri
+  ul:value -> value
+}
+
+type expression [
+  ul:uri <- uri
+  ul:literal <- string
+  ul:map <- * ul:map
+  ul:case <- * ul:case
+  ul:projection <- * ul:projection
+  ul:dereference <- * ul:dereference
+  ul:match <- * ul:match
+  ul:construction <- * ul:construction
+  ul:injection <- * ul:injection
+]
+
+class ul:match {
+  ul:value -> value
+}
+
+class ul:case {
+  ul:source -> * ul:match
+  ul:key -> uri
+  ul:value -> expression
+}
+
+class ul:construction {}
+
+class ul:slot {
+  ul:source -> * ul:construction
+  ul:key -> uri
+  ul:value -> expression
+}
+
+class ul:injection {
+  ul:key -> uri
+  ul:value -> expression
+}
+```
